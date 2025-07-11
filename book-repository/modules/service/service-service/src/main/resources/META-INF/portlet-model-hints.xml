@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.hehehe.servicebuilder.model.Author">
+		<field name="authorId" type="String" />
+		<field name="name" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.hehehe.servicebuilder.model.Book">
+		<field name="bookId" type="String" />
+		<field name="title" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="description" type="String" />
+		<field name="thumbnail" type="String" />
+		<field name="published_year" type="Integer" />
+		<field name="num_pages" type="Integer" />
+		<field name="price" type="Integer" />
+		<field name="stock" type="Integer" />
+		<field name="subtitleId" type="String" />
+		<field name="categoryId" type="String" />
+	</model>
+	<model name="com.hehehe.servicebuilder.model.BookAuthor">
+		<field name="bookId" type="String" />
+		<field name="authorId" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.hehehe.servicebuilder.model.Category">
+		<field name="categoryId" type="String" />
+		<field name="name" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="com.hehehe.servicebuilder.model.Subtitle">
+		<field name="subtitleId" type="String" />
+		<field name="name" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+</model-hints>

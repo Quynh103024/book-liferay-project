@@ -1,0 +1,11 @@
+Bundle-Name: service-api
+Bundle-SymbolicName: com.hehehe.servicebuilder.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.hehehe.servicebuilder.exception,\
+	com.hehehe.servicebuilder.model,\
+	com.hehehe.servicebuilder.service,\
+	com.hehehe.servicebuilder.service.persistence,\
+	com.hehehe.util.comparator
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../service-service/service.xml

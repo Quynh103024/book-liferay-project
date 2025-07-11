@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
+
+<service-builder dependency-injector="ds"
+	package-path="com.hehehe.servicebuilder">
+	<namespace>BookServiceBuilder</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" 
+		remote-service="false" session-factory="sampleSessionFactory" table="foo" 
+		tx-manager="sampleTransactionManager uuid="true""> -->
+	<entity name="Category" local-service="true"
+		remote-service="true">
+		<column name="categoryId" type="String" primary="true"></column>
+		<column name="name" type="String" primary="false"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+	</entity>
+	<entity name="Subtitle" local-service="true"
+		remote-service="true">
+		<column name="subtitleId" type="String" primary="true"></column>
+		<column name="name" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+	</entity>
+	<entity name="Author" local-service="true" remote-service="true">
+		<column name="authorId" type="String" primary="true"></column>
+		<column name="name" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+	</entity>
+	<entity name="Book" local-service="true" remote-service="true">
+		<column name="bookId" type="String" primary="true"></column>
+		<column name="title" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+		<column name="description" type="String"></column>
+		<column name="thumbnail" type="String"></column>
+		<column name="published_year" type="Integer"></column>
+		<column name="num_pages" type="Integer"></column>
+		<column name="price" type="Integer"></column>
+		<column name="stock" type="Integer"></column>
+		<column name="subtitleId" type="String"></column>
+		<column name="categoryId" type="String"></column>
+		<finder name="SubtitleId" return-type="Collection">
+			<finder-column name="subtitleId"></finder-column>
+		</finder>
+		<finder name="CategoryId" return-type="Collection">
+			<finder-column name="categoryId"></finder-column>
+		</finder>
+	</entity>
+	<entity name="BookAuthor" local-service="true"
+		remote-service="false">
+		<column name="bookId" type="String" primary="true"></column>
+		<column name="authorId" type="String" primary="true"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+	    <finder name="BookId" return-type="Collection">
+	        <finder-column name="bookId" />
+	    </finder>
+	    <finder name="AuthorId" return-type="Collection">
+	        <finder-column name="authorId" />
+	    </finder>
+	</entity>
+</service-builder>
