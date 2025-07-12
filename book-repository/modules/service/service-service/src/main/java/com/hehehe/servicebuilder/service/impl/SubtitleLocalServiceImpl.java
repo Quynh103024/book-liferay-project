@@ -8,9 +8,11 @@ package com.hehehe.servicebuilder.service.impl;
 import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.model.Subtitle;
 import com.hehehe.servicebuilder.model.impl.SubtitleImpl;
+import com.hehehe.servicebuilder.service.BookLocalService;
 import com.hehehe.servicebuilder.service.base.SubtitleLocalServiceBaseImpl;
 
 import com.liferay.portal.aop.AopService;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.Date;
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Brian Wing Shun Chan
@@ -27,6 +30,9 @@ import org.osgi.service.component.annotations.Component;
 	service = AopService.class
 )
 public class SubtitleLocalServiceImpl extends SubtitleLocalServiceBaseImpl {
+	@Reference
+	private BookLocalService bookLocalService;
+	
 	public Subtitle addSubtitle(String name) {
 		Subtitle subtitle = new SubtitleImpl();
 		String id = UUID.randomUUID().toString();
@@ -43,10 +49,18 @@ public class SubtitleLocalServiceImpl extends SubtitleLocalServiceBaseImpl {
 	public List<Book> getBooks(int start, int end, OrderByComparator<Book> obc, String subtitleId){
 		return bookPersistence.findBySubtitleId(subtitleId, start, end, obc);
 	}
+	public List<Book> getAllBook(String subtitleId){
+		return bookPersistence.findBySubtitleId(subtitleId);
+	}
 	@Override
 	public Subtitle updateSubtitle(Subtitle subtitle) {
 		Date now = new Date();
 		subtitle.setModifiedDate(now);
 		return subtitlePersistence.update(subtitle);
+	}
+	@Override
+	public Subtitle deleteSubtitle(String subtitleId) throws PortalException {
+		bookLocalService.deleteBooksBySubtitleId(subtitleId);
+		return subtitleLocalService.deleteSubtitle(subtitleId);
 	}
 }
