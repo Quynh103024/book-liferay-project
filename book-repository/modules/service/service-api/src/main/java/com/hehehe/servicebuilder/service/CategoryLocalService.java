@@ -193,6 +193,9 @@ public interface CategoryLocalService
 	public Category fetchCategory(String categoryId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getAllBooks(String categoryId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Book> getBooks(
 		int start, int end, OrderByComparator<Book> obc, String categoryId);
 

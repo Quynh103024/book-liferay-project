@@ -205,6 +205,12 @@ public class SubtitleLocalServiceUtil {
 		return getService().fetchSubtitle(subtitleId);
 	}
 
+	public static List<com.hehehe.servicebuilder.model.Book> getAllBook(
+		String subtitleId) {
+
+		return getService().getAllBook(subtitleId);
+	}
+
 	public static List<com.hehehe.servicebuilder.model.Book> getBooks(
 		int start, int end,
 		OrderByComparator<com.hehehe.servicebuilder.model.Book> obc,

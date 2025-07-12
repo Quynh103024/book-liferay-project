@@ -192,6 +192,9 @@ public interface SubtitleLocalService
 	public Subtitle fetchSubtitle(String subtitleId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getAllBook(String subtitleId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Book> getBooks(
 		int start, int end, OrderByComparator<Book> obc, String subtitleId);
 

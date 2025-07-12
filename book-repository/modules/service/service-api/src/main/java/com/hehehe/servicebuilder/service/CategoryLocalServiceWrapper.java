@@ -231,6 +231,13 @@ public class CategoryLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book> getAllBooks(
+		String categoryId) {
+
+		return _categoryLocalService.getAllBooks(categoryId);
+	}
+
+	@Override
 	public java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator

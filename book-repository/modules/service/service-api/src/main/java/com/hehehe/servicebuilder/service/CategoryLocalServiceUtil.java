@@ -206,6 +206,12 @@ public class CategoryLocalServiceUtil {
 		return getService().fetchCategory(categoryId);
 	}
 
+	public static List<com.hehehe.servicebuilder.model.Book> getAllBooks(
+		String categoryId) {
+
+		return getService().getAllBooks(categoryId);
+	}
+
 	public static List<com.hehehe.servicebuilder.model.Book> getBooks(
 		int start, int end,
 		OrderByComparator<com.hehehe.servicebuilder.model.Book> obc,

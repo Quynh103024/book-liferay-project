@@ -231,6 +231,13 @@ public class SubtitleLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book> getAllBook(
+		String subtitleId) {
+
+		return _subtitleLocalService.getAllBook(subtitleId);
+	}
+
+	@Override
 	public java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
