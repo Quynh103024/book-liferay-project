@@ -47,8 +47,7 @@
 			<finder-column name="categoryId"></finder-column>
 		</finder>
 	</entity>
-	<entity name="BookAuthor" local-service="true"
-		remote-service="false">
+	<entity name="BookAuthor" local-service="true">
 		<column name="bookId" type="String" primary="true"></column>
 		<column name="authorId" type="String" primary="true"></column>
 		<column name="createDate" type="Date"></column>

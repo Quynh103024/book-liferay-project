@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Brian Wing Shun Chan
@@ -32,6 +33,8 @@ import org.osgi.service.component.annotations.Component;
 	service = AopService.class
 )
 public class BookLocalServiceImpl extends BookLocalServiceBaseImpl {
+	@Reference
+	BookAuthorLocalService bookAuthorLocalService;
 	public Book addBook(String title,String description, String thumbnail, String subtitleId, String categoryId, Integer price, Integer stock, Integer pages, Integer publicYear) {
 		Book book = new BookImpl();
 		String id = UUID.randomUUID().toString();
@@ -91,7 +94,6 @@ public class BookLocalServiceImpl extends BookLocalServiceBaseImpl {
 		return bookPersistence.update(book);
 	}
 	public void addAuthers(List<String> autherIds, String bookId) {
-		BookAuthorLocalService bas = new BookAuthorLocalServiceImpl();
 		Date now = new Date();
 		for(String id : autherIds) {
 			BookAuthor ba = new BookAuthorImpl();
@@ -99,7 +101,7 @@ public class BookLocalServiceImpl extends BookLocalServiceBaseImpl {
 			ba.setBookId(bookId);
 			ba.setCreateDate(now);
 			ba.setModifiedDate(now);
-			bas.addBookAuthor(ba);
+			bookAuthorLocalService.addBookAuthor(ba);
 		}
 	}
 }

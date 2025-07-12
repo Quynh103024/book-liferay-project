@@ -11,6 +11,7 @@ import com.hehehe.servicebuilder.service.persistence.BookAuthorPK;
 
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
@@ -44,6 +45,7 @@ import java.util.function.Function;
  * @see BookAuthorImpl
  * @generated
  */
+@JSON(strict = true)
 public class BookAuthorModelImpl
 	extends BaseModelImpl<BookAuthor> implements BookAuthorModel {
 
@@ -248,6 +250,7 @@ public class BookAuthorModelImpl
 
 	}
 
+	@JSON
 	@Override
 	public String getBookId() {
 		if (_bookId == null) {
@@ -276,6 +279,7 @@ public class BookAuthorModelImpl
 		return getColumnOriginalValue("bookId");
 	}
 
+	@JSON
 	@Override
 	public String getAuthorId() {
 		if (_authorId == null) {
@@ -304,6 +308,7 @@ public class BookAuthorModelImpl
 		return getColumnOriginalValue("authorId");
 	}
 
+	@JSON
 	@Override
 	public Date getCreateDate() {
 		return _createDate;
@@ -318,6 +323,7 @@ public class BookAuthorModelImpl
 		_createDate = createDate;
 	}
 
+	@JSON
 	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
