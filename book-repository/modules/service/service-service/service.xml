@@ -13,6 +13,9 @@
 		<column name="name" type="String" primary="false"></column>
 		<column name="createDate" type="Date"></column>
 		<column name="modifiedDate" type="Date"></column>
+		<finder return-type="Category" name="Name">
+			<finder-column name="name"></finder-column>
+		</finder>
 	</entity>
 	<entity name="Subtitle" local-service="true"
 		remote-service="true">
@@ -20,12 +23,18 @@
 		<column name="name" type="String"></column>
 		<column name="createDate" type="Date"></column>
 		<column name="modifiedDate" type="Date"></column>
+		<finder return-type="Subtitle" name="Name">
+			<finder-column name="name"></finder-column>
+		</finder>
 	</entity>
 	<entity name="Author" local-service="true" remote-service="true">
 		<column name="authorId" type="String" primary="true"></column>
 		<column name="name" type="String"></column>
 		<column name="createDate" type="Date"></column>
 		<column name="modifiedDate" type="Date"></column>
+		<finder return-type="Author" name="Name">
+			<finder-column name="name"></finder-column>
+		</finder>
 	</entity>
 	<entity name="Book" local-service="true" remote-service="true">
 		<column name="bookId" type="String" primary="true"></column>
@@ -52,11 +61,11 @@
 		<column name="authorId" type="String" primary="true"></column>
 		<column name="createDate" type="Date"></column>
 		<column name="modifiedDate" type="Date"></column>
-	    <finder name="BookId" return-type="Collection">
-	        <finder-column name="bookId" />
-	    </finder>
-	    <finder name="AuthorId" return-type="Collection">
-	        <finder-column name="authorId" />
-	    </finder>
+		<finder name="BookId" return-type="Collection">
+			<finder-column name="bookId" />
+		</finder>
+		<finder name="AuthorId" return-type="Collection">
+			<finder-column name="authorId" />
+		</finder>
 	</entity>
 </service-builder>

@@ -230,23 +230,6 @@ public class CategoryLocalServiceWrapper
 		return _categoryLocalService.fetchCategory(categoryId);
 	}
 
-	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Book> getAllBooks(
-		String categoryId) {
-
-		return _categoryLocalService.getAllBooks(categoryId);
-	}
-
-	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<com.hehehe.servicebuilder.model.Book> obc,
-		String categoryId) {
-
-		return _categoryLocalService.getBooks(start, end, obc, categoryId);
-	}
-
 	/**
 	 * Returns a range of all the categories.
 	 *
@@ -265,6 +248,16 @@ public class CategoryLocalServiceWrapper
 		return _categoryLocalService.getCategories(start, end);
 	}
 
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Category>
+		getCategories(
+			int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.hehehe.servicebuilder.model.Category> obc) {
+
+		return _categoryLocalService.getCategories(start, end, obc);
+	}
+
 	/**
 	 * Returns the number of categories.
 	 *
@@ -273,16 +266,6 @@ public class CategoryLocalServiceWrapper
 	@Override
 	public int getCategoriesCount() {
 		return _categoryLocalService.getCategoriesCount();
-	}
-
-	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Category>
-		getCategoriesSorted(
-			int start, int end,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<com.hehehe.servicebuilder.model.Category> obc) {
-
-		return _categoryLocalService.getCategoriesSorted(start, end, obc);
 	}
 
 	/**
@@ -298,6 +281,14 @@ public class CategoryLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _categoryLocalService.getCategory(categoryId);
+	}
+
+	@Override
+	public com.hehehe.servicebuilder.model.Category getCategoryByBookId(
+			String bookId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _categoryLocalService.getCategoryByBookId(bookId);
 	}
 
 	/**
@@ -319,6 +310,11 @@ public class CategoryLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _categoryLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	@Override
+	public boolean isExist(String name) {
+		return _categoryLocalService.isExist(name);
 	}
 
 	/**

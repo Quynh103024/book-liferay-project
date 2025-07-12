@@ -30,37 +30,56 @@ import org.osgi.service.component.annotations.Reference;
 	service = AopService.class
 )
 public class CategoryLocalServiceImpl extends CategoryLocalServiceBaseImpl {
+	
+//	REFERENCE
+	
 	@Reference
 	private BookLocalService bookLocalService;
 	
+//	CREATE
+	
 	public Category addCategory(String name) {
-		Category category = new CategoryImpl();
 		String id = UUID.randomUUID().toString();
 		Date now = new Date();
+		Category category = new CategoryImpl();
 		category.setCategoryId(id);
 		category.setName(name);
 		category.setCreateDate(now);
 		category.setModifiedDate(now);
-		return categoryLocalService.addCategory(category);
+		return super.addCategory(category);
 	}
-	public List<Category> getCategoriesSorted(int start, int end, OrderByComparator<Category> obc){
+	
+//	READ
+	
+	public List<Category> getCategories(int start, int end, OrderByComparator<Category> obc){
 		return categoryPersistence.findAll(start, end, obc);
 	}
-	public List<Book> getBooks(int start, int end, OrderByComparator<Book> obc, String categoryId){
-		return bookPersistence.findByCategoryId(categoryId, start, end, obc);
+	
+	public Category getCategoryByBookId(String bookId) throws PortalException {
+		Book book = bookLocalService.getBook(bookId);
+		return super.getCategory(book.getCategoryId());
 	}
-	public List<Book> getAllBooks(String categoryId){
-		return bookPersistence.findByCategoryId(categoryId);
-	}
-	@Override
-	public Category deleteCategory(String categoryId) throws PortalException {
-		bookLocalService.deleteBooksByCategoryId(categoryId);
-		return categoryPersistence.remove(categoryId);
-	}
+	
+//	UPDATE
+	
 	@Override
 	public Category updateCategory(Category category) {
 		Date now = new Date();
 		category.setModifiedDate(now);
-		return categoryPersistence.update(category);
+		return super.updateCategory(category);
+	}
+	
+//	DELETE
+	
+	@Override
+	public Category deleteCategory(String categoryId) throws PortalException {
+		bookLocalService.deleteBooksByCategoryId(categoryId);
+		return super.deleteCategory(categoryId);
+	}
+	
+//	LOGIC METHOD
+	
+	public boolean isExist(String name) {
+		return categoryPersistence.fetchByName(name) != null;
 	}
 }

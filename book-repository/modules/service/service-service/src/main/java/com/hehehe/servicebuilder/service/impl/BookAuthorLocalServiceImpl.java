@@ -5,9 +5,12 @@
 
 package com.hehehe.servicebuilder.service.impl;
 
+import com.hehehe.servicebuilder.model.BookAuthor;
 import com.hehehe.servicebuilder.service.base.BookAuthorLocalServiceBaseImpl;
 
 import com.liferay.portal.aop.AopService;
+
+import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -19,4 +22,16 @@ import org.osgi.service.component.annotations.Component;
 	service = AopService.class
 )
 public class BookAuthorLocalServiceImpl extends BookAuthorLocalServiceBaseImpl {
+	public List<BookAuthor> getBookAuthorByAuthorId(String authorId){
+		return bookAuthorPersistence.findByAuthorId(authorId);
+	}
+	public List<BookAuthor> getBookAuthorByBookId(String bookId){
+		return bookAuthorPersistence.findByBookId(bookId);
+	}
+	public void deleteBookAuthorByAuthorId(String authorId) {
+		bookAuthorPersistence.removeByAuthorId(authorId);
+	}
+	public void deleteBookAuthorByBookId(String bookId) {
+		bookAuthorPersistence.removeByBookId(bookId);
+	}
 }

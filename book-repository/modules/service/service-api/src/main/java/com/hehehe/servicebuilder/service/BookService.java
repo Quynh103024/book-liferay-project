@@ -5,7 +5,6 @@
 
 package com.hehehe.servicebuilder.service;
 
-import com.hehehe.servicebuilder.model.Author;
 import com.hehehe.servicebuilder.model.Book;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -48,9 +47,11 @@ public interface BookService extends BaseService {
 	public void addAuthers(List<String> autherIds, String bookId);
 
 	public Book addBook(
-		String title, String description, String thumbnail, String subtitleId,
-		String categoryId, Integer price, Integer stock, Integer pages,
-		Integer publicYear);
+		List<String> authorIds, String title, String description,
+		String thumbnail, String subtitleId, String categoryId, Integer price,
+		Integer stock, Integer pages, Integer publicYear);
+
+	public void changeAuthors(List<String> authorIds, String bookId);
 
 	public Book deleteBook(String bookId) throws PortalException;
 
@@ -61,16 +62,42 @@ public interface BookService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Book> getAllBook();
+	public Book getBookById(String bookId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Author> getAuthors(String bookId) throws PortalException;
+	public List<Book> getBooks();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Book getBook(String bookId) throws PortalException;
+	public List<Book> getBooks(int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Book> getBooks(int start, int end, OrderByComparator<Book> obc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksByAuthorId(String authorId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksByCategoryId(String categoryId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksByCategoryId(
+		String categoryId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksByCategoryId(
+		String categoryId, int start, int end, OrderByComparator<Book> obc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksBySubtitleId(String subtitleId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksBySubtitleId(
+		String subtitleId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksBySubtitleId(
+		String subtitleId, int start, int end, OrderByComparator<Book> obc);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getBooksCount();

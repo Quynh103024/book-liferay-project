@@ -47,10 +47,4 @@ public interface Book extends BookModel, PersistedModel {
 
 		};
 
-	public Category getCategory()
-		throws com.liferay.portal.kernel.exception.PortalException;
-
-	public Subtitle getSubtitle()
-		throws com.liferay.portal.kernel.exception.PortalException;
-
 }

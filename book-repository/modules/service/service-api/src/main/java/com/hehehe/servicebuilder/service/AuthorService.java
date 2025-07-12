@@ -6,7 +6,6 @@
 package com.hehehe.servicebuilder.service;
 
 import com.hehehe.servicebuilder.model.Author;
-import com.hehehe.servicebuilder.model.Book;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -50,20 +49,24 @@ public interface AuthorService extends BaseService {
 	public Author deleteAuthor(String authorId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Author> getAllAuthor();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Author getAuthorById(String authorId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAuthorCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Author> getAuthors();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Author> getAuthors(int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Author> getAuthors(
 		int start, int end, OrderByComparator<Author> obc);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Book> getBooks(String authorId) throws PortalException;
+	public List<Author> getAuthorsByBookId(String bookId)
+		throws PortalException;
 
 	/**
 	 * Returns the OSGi service identifier.
@@ -71,6 +74,9 @@ public interface AuthorService extends BaseService {
 	 * @return the OSGi service identifier
 	 */
 	public String getOSGiServiceIdentifier();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isExist(String name);
 
 	public Author updateAuthor(Author author);
 

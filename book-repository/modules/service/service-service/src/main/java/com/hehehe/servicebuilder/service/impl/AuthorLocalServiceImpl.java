@@ -6,9 +6,10 @@
 package com.hehehe.servicebuilder.service.impl;
 
 import com.hehehe.servicebuilder.model.Author;
-import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.model.BookAuthor;
 import com.hehehe.servicebuilder.model.impl.AuthorImpl;
+import com.hehehe.servicebuilder.service.BookAuthorLocalService;
+import com.hehehe.servicebuilder.service.BookLocalService;
 import com.hehehe.servicebuilder.service.base.AuthorLocalServiceBaseImpl;
 
 import com.liferay.portal.aop.AopService;
@@ -21,48 +22,74 @@ import java.util.List;
 import java.util.UUID;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Brian Wing Shun Chan
  */
 @Component(property = "model.class.name=com.hehehe.servicebuilder.model.Author", service = AopService.class)
 public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
+//	REFERENCE
+	
+	@Reference
+	private BookLocalService bookLocalService;
+	@Reference
+	private BookAuthorLocalService bookAuthorLocalService;
+	
+//	CREATE
+	
 	public Author addAuthor(String name) {
-		Author author = new AuthorImpl();
 		String id = UUID.randomUUID().toString();
 		Date now = new Date();
+		Author author = new AuthorImpl();
 		author.setAuthorId(id);
 		author.setName(name);
 		author.setCreateDate(now);
 		author.setModifiedDate(now);
-		return authorLocalService.addAuthor(author);
+		return super.addAuthor(author);
 	}
-	public List<Author> getAuthorsSorted(int start, int end, OrderByComparator<Author> obc){
+	
+//	READ
+	
+	public List<Author> getAuthors(int start, int end, OrderByComparator<Author> obc){
 		return authorPersistence.findAll(start,end,obc);
 	}
-	public List<Book> getBooks(String authorId) throws PortalException {
-		List<BookAuthor> bas = bookAuthorPersistence.findByAuthorId(authorId);
-		List<Book> books = new ArrayList<>();
+	public List<Author> getAuthorsByBookId(String bookId) throws PortalException {
+		List<BookAuthor> bas = bookAuthorLocalService.getBookAuthorByBookId(bookId);
+		List<Author> authors = new ArrayList<>();
 		for(BookAuthor ba : bas) {
-			Book book = bookPersistence.findByPrimaryKey(ba.getBookId());
-			books.add(book);
+			Author author = super.getAuthor(ba.getAuthorId());
+			authors.add(author);
 		}
-		return books;
+		return authors;
 	}
-	@Override
-	public Author deleteAuthor(String authorId) throws PortalException {
-		bookAuthorPersistence.removeByAuthorId(authorId);
-		return authorPersistence.remove(authorId);
-	}
+	
+//	UPDATE
+	
 	@Override
 	public Author updateAuthor(Author author) {
 		Date now = new Date();
 		author.setModifiedDate(now);
-		List<BookAuthor> bas = bookAuthorPersistence.findByAuthorId(author.getAuthorId());
+		List<BookAuthor> bas = bookAuthorLocalService.getBookAuthorByAuthorId(author.getAuthorId());
 		for(BookAuthor ba : bas) {
 			ba.setModifiedDate(now);
-			bookAuthorPersistence.update(ba);
+			bookAuthorLocalService.updateBookAuthor(ba);
 		}
-		return authorPersistence.update(author);
+		return super.updateAuthor(author);
 	}
+	
+//	DELETE
+	
+	@Override
+	public Author deleteAuthor(String authorId) throws PortalException {
+		bookAuthorLocalService.deleteBookAuthorByAuthorId(authorId);
+		return super.deleteAuthor(authorId);
+	}
+	
+//	LOGIC METHOD
+
+	public boolean isExist(String name) {
+		return authorPersistence.fetchByName(name) != null;
+	}
+
 }

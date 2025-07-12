@@ -40,19 +40,9 @@ public class CategoryServiceWrapper
 
 	@Override
 	public java.util.List<com.hehehe.servicebuilder.model.Category>
-		getAllCategory() {
+		getCategories() {
 
-		return _categoryService.getAllCategory();
-	}
-
-	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<com.hehehe.servicebuilder.model.Book> obc,
-		String categoryId) {
-
-		return _categoryService.getBooks(start, end, obc, categoryId);
+		return _categoryService.getCategories();
 	}
 
 	@Override
@@ -71,6 +61,14 @@ public class CategoryServiceWrapper
 	}
 
 	@Override
+	public com.hehehe.servicebuilder.model.Category getCategoryByBookId(
+			String bookId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _categoryService.getCategoryByBookId(bookId);
+	}
+
+	@Override
 	public com.hehehe.servicebuilder.model.Category getCategoryById(
 			String categoryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -86,6 +84,11 @@ public class CategoryServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _categoryService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public boolean isExist(String name) {
+		return _categoryService.isExist(name);
 	}
 
 	@Override

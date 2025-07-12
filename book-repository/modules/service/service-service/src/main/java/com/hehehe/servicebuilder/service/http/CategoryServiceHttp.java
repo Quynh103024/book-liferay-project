@@ -113,6 +113,113 @@ public class CategoryServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.hehehe.servicebuilder.model.Category>
+		getCategories(
+			HttpPrincipal httpPrincipal, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.hehehe.servicebuilder.model.Category> obc) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CategoryServiceUtil.class, "getCategories",
+				_getCategoriesParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, start, end, obc);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Category>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.hehehe.servicebuilder.model.Category>
+		getCategories(HttpPrincipal httpPrincipal) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CategoryServiceUtil.class, "getCategories",
+				_getCategoriesParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Category>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static com.hehehe.servicebuilder.model.Category getCategoryByBookId(
+			HttpPrincipal httpPrincipal, String bookId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CategoryServiceUtil.class, "getCategoryByBookId",
+				_getCategoryByBookIdParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, bookId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (com.hehehe.servicebuilder.model.Category)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	public static com.hehehe.servicebuilder.model.Category updateCategory(
 		HttpPrincipal httpPrincipal,
 		com.hehehe.servicebuilder.model.Category category) {
@@ -120,7 +227,7 @@ public class CategoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CategoryServiceUtil.class, "updateCategory",
-				_updateCategoryParameterTypes2);
+				_updateCategoryParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, category);
@@ -153,7 +260,7 @@ public class CategoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CategoryServiceUtil.class, "deleteCategory",
-				_deleteCategoryParameterTypes3);
+				_deleteCategoryParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, categoryId);
@@ -176,110 +283,6 @@ public class CategoryServiceHttp {
 			}
 
 			return (com.hehehe.servicebuilder.model.Category)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException
-					systemException) {
-
-			_log.error(systemException, systemException);
-
-			throw systemException;
-		}
-	}
-
-	public static java.util.List<com.hehehe.servicebuilder.model.Category>
-		getCategories(
-			HttpPrincipal httpPrincipal, int start, int end,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<com.hehehe.servicebuilder.model.Category> obc) {
-
-		try {
-			MethodKey methodKey = new MethodKey(
-				CategoryServiceUtil.class, "getCategories",
-				_getCategoriesParameterTypes4);
-
-			MethodHandler methodHandler = new MethodHandler(
-				methodKey, start, end, obc);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception exception) {
-				throw new com.liferay.portal.kernel.exception.SystemException(
-					exception);
-			}
-
-			return (java.util.List<com.hehehe.servicebuilder.model.Category>)
-				returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException
-					systemException) {
-
-			_log.error(systemException, systemException);
-
-			throw systemException;
-		}
-	}
-
-	public static java.util.List<com.hehehe.servicebuilder.model.Category>
-		getAllCategory(HttpPrincipal httpPrincipal) {
-
-		try {
-			MethodKey methodKey = new MethodKey(
-				CategoryServiceUtil.class, "getAllCategory",
-				_getAllCategoryParameterTypes5);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception exception) {
-				throw new com.liferay.portal.kernel.exception.SystemException(
-					exception);
-			}
-
-			return (java.util.List<com.hehehe.servicebuilder.model.Category>)
-				returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException
-					systemException) {
-
-			_log.error(systemException, systemException);
-
-			throw systemException;
-		}
-	}
-
-	public static java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
-		HttpPrincipal httpPrincipal, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<com.hehehe.servicebuilder.model.Book> obc,
-		String categoryId) {
-
-		try {
-			MethodKey methodKey = new MethodKey(
-				CategoryServiceUtil.class, "getBooks",
-				_getBooksParameterTypes6);
-
-			MethodHandler methodHandler = new MethodHandler(
-				methodKey, start, end, obc, categoryId);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception exception) {
-				throw new com.liferay.portal.kernel.exception.SystemException(
-					exception);
-			}
-
-			return (java.util.List<com.hehehe.servicebuilder.model.Book>)
-				returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException
 					systemException) {
@@ -319,6 +322,34 @@ public class CategoryServiceHttp {
 		}
 	}
 
+	public static boolean isExist(HttpPrincipal httpPrincipal, String name) {
+		try {
+			MethodKey methodKey = new MethodKey(
+				CategoryServiceUtil.class, "isExist", _isExistParameterTypes8);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, name);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return ((Boolean)returnObj).booleanValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CategoryServiceHttp.class);
 
 	private static final Class<?>[] _addCategoryParameterTypes0 = new Class[] {
@@ -326,22 +357,23 @@ public class CategoryServiceHttp {
 	};
 	private static final Class<?>[] _getCategoryByIdParameterTypes1 =
 		new Class[] {String.class};
-	private static final Class<?>[] _updateCategoryParameterTypes2 =
-		new Class[] {com.hehehe.servicebuilder.model.Category.class};
-	private static final Class<?>[] _deleteCategoryParameterTypes3 =
-		new Class[] {String.class};
-	private static final Class<?>[] _getCategoriesParameterTypes4 =
+	private static final Class<?>[] _getCategoriesParameterTypes2 =
 		new Class[] {
 			int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getAllCategoryParameterTypes5 =
+	private static final Class<?>[] _getCategoriesParameterTypes3 =
 		new Class[] {};
-	private static final Class<?>[] _getBooksParameterTypes6 = new Class[] {
-		int.class, int.class,
-		com.liferay.portal.kernel.util.OrderByComparator.class, String.class
-	};
+	private static final Class<?>[] _getCategoryByBookIdParameterTypes4 =
+		new Class[] {String.class};
+	private static final Class<?>[] _updateCategoryParameterTypes5 =
+		new Class[] {com.hehehe.servicebuilder.model.Category.class};
+	private static final Class<?>[] _deleteCategoryParameterTypes6 =
+		new Class[] {String.class};
 	private static final Class<?>[] _getCategoriesCountParameterTypes7 =
 		new Class[] {};
+	private static final Class<?>[] _isExistParameterTypes8 = new Class[] {
+		String.class
+	};
 
 }

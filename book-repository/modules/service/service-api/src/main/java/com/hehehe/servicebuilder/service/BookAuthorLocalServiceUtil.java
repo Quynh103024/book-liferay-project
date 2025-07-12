@@ -108,6 +108,14 @@ public class BookAuthorLocalServiceUtil {
 		return getService().deleteBookAuthor(bookAuthorPK);
 	}
 
+	public static void deleteBookAuthorByAuthorId(String authorId) {
+		getService().deleteBookAuthorByAuthorId(authorId);
+	}
+
+	public static void deleteBookAuthorByBookId(String bookId) {
+		getService().deleteBookAuthorByBookId(bookId);
+	}
+
 	/**
 	 * @throws PortalException
 	 */
@@ -223,6 +231,14 @@ public class BookAuthorLocalServiceUtil {
 		throws PortalException {
 
 		return getService().getBookAuthor(bookAuthorPK);
+	}
+
+	public static List<BookAuthor> getBookAuthorByAuthorId(String authorId) {
+		return getService().getBookAuthorByAuthorId(authorId);
+	}
+
+	public static List<BookAuthor> getBookAuthorByBookId(String bookId) {
+		return getService().getBookAuthorByBookId(bookId);
 	}
 
 	/**

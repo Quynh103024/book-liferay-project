@@ -40,10 +40,6 @@ public class AuthorServiceUtil {
 		return getService().deleteAuthor(authorId);
 	}
 
-	public static List<Author> getAllAuthor() {
-		return getService().getAllAuthor();
-	}
-
 	public static Author getAuthorById(String authorId) throws PortalException {
 		return getService().getAuthorById(authorId);
 	}
@@ -52,17 +48,24 @@ public class AuthorServiceUtil {
 		return getService().getAuthorCount();
 	}
 
+	public static List<Author> getAuthors() {
+		return getService().getAuthors();
+	}
+
+	public static List<Author> getAuthors(int start, int end) {
+		return getService().getAuthors(start, end);
+	}
+
 	public static List<Author> getAuthors(
 		int start, int end, OrderByComparator<Author> obc) {
 
 		return getService().getAuthors(start, end, obc);
 	}
 
-	public static List<com.hehehe.servicebuilder.model.Book> getBooks(
-			String authorId)
+	public static List<Author> getAuthorsByBookId(String bookId)
 		throws PortalException {
 
-		return getService().getBooks(authorId);
+		return getService().getAuthorsByBookId(bookId);
 	}
 
 	/**
@@ -72,6 +75,10 @@ public class AuthorServiceUtil {
 	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static boolean isExist(String name) {
+		return getService().isExist(name);
 	}
 
 	public static Author updateAuthor(Author author) {

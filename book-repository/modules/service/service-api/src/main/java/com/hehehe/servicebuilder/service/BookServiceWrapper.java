@@ -32,13 +32,18 @@ public class BookServiceWrapper
 
 	@Override
 	public com.hehehe.servicebuilder.model.Book addBook(
-		String title, String description, String thumbnail, String subtitleId,
-		String categoryId, Integer price, Integer stock, Integer pages,
-		Integer publicYear) {
+		java.util.List<String> authorIds, String title, String description,
+		String thumbnail, String subtitleId, String categoryId, Integer price,
+		Integer stock, Integer pages, Integer publicYear) {
 
 		return _bookService.addBook(
-			title, description, thumbnail, subtitleId, categoryId, price, stock,
-			pages, publicYear);
+			authorIds, title, description, thumbnail, subtitleId, categoryId,
+			price, stock, pages, publicYear);
+	}
+
+	@Override
+	public void changeAuthors(java.util.List<String> authorIds, String bookId) {
+		_bookService.changeAuthors(authorIds, bookId);
 	}
 
 	@Override
@@ -63,23 +68,22 @@ public class BookServiceWrapper
 	}
 
 	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Book> getAllBook() {
-		return _bookService.getAllBook();
+	public com.hehehe.servicebuilder.model.Book getBookById(String bookId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _bookService.getBookById(bookId);
 	}
 
 	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Author> getAuthors(
-			String bookId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _bookService.getAuthors(bookId);
+	public java.util.List<com.hehehe.servicebuilder.model.Book> getBooks() {
+		return _bookService.getBooks();
 	}
 
 	@Override
-	public com.hehehe.servicebuilder.model.Book getBook(String bookId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
+		int start, int end) {
 
-		return _bookService.getBook(bookId);
+		return _bookService.getBooks(start, end);
 	}
 
 	@Override
@@ -89,6 +93,62 @@ public class BookServiceWrapper
 			<com.hehehe.servicebuilder.model.Book> obc) {
 
 		return _bookService.getBooks(start, end, obc);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+			getBooksByAuthorId(String authorId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _bookService.getBooksByAuthorId(authorId);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksByCategoryId(String categoryId) {
+
+		return _bookService.getBooksByCategoryId(categoryId);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksByCategoryId(String categoryId, int start, int end) {
+
+		return _bookService.getBooksByCategoryId(categoryId, start, end);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksByCategoryId(
+			String categoryId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.hehehe.servicebuilder.model.Book> obc) {
+
+		return _bookService.getBooksByCategoryId(categoryId, start, end, obc);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksBySubtitleId(String subtitleId) {
+
+		return _bookService.getBooksBySubtitleId(subtitleId);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksBySubtitleId(String subtitleId, int start, int end) {
+
+		return _bookService.getBooksBySubtitleId(subtitleId, start, end);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksBySubtitleId(
+			String subtitleId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.hehehe.servicebuilder.model.Book> obc) {
+
+		return _bookService.getBooksBySubtitleId(subtitleId, start, end, obc);
 	}
 
 	@Override

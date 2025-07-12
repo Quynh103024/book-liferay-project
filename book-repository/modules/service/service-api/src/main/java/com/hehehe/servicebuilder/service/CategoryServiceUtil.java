@@ -42,16 +42,8 @@ public class CategoryServiceUtil {
 		return getService().deleteCategory(categoryId);
 	}
 
-	public static List<Category> getAllCategory() {
-		return getService().getAllCategory();
-	}
-
-	public static List<com.hehehe.servicebuilder.model.Book> getBooks(
-		int start, int end,
-		OrderByComparator<com.hehehe.servicebuilder.model.Book> obc,
-		String categoryId) {
-
-		return getService().getBooks(start, end, obc, categoryId);
+	public static List<Category> getCategories() {
+		return getService().getCategories();
 	}
 
 	public static List<Category> getCategories(
@@ -62,6 +54,12 @@ public class CategoryServiceUtil {
 
 	public static int getCategoriesCount() {
 		return getService().getCategoriesCount();
+	}
+
+	public static Category getCategoryByBookId(String bookId)
+		throws PortalException {
+
+		return getService().getCategoryByBookId(bookId);
 	}
 
 	public static Category getCategoryById(String categoryId)
@@ -77,6 +75,10 @@ public class CategoryServiceUtil {
 	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static boolean isExist(String name) {
+		return getService().isExist(name);
 	}
 
 	public static Category updateCategory(Category category) {

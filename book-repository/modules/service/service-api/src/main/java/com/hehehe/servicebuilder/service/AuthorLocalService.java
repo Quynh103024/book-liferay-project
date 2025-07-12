@@ -6,7 +6,6 @@
 package com.hehehe.servicebuilder.service;
 
 import com.hehehe.servicebuilder.model.Author;
-import com.hehehe.servicebuilder.model.Book;
 
 import com.liferay.petra.sql.dsl.query.DSLQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -216,6 +215,14 @@ public interface AuthorLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Author> getAuthors(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Author> getAuthors(
+		int start, int end, OrderByComparator<Author> obc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Author> getAuthorsByBookId(String bookId)
+		throws PortalException;
+
 	/**
 	 * Returns the number of authors.
 	 *
@@ -223,13 +230,6 @@ public interface AuthorLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAuthorsCount();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Author> getAuthorsSorted(
-		int start, int end, OrderByComparator<Author> obc);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Book> getBooks(String authorId) throws PortalException;
 
 	/**
 	 * Returns the OSGi service identifier.
@@ -245,6 +245,9 @@ public interface AuthorLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isExist(String name);
 
 	/**
 	 * Updates the author in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

@@ -5,11 +5,10 @@
 
 package com.hehehe.servicebuilder.service.impl;
 
-import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.model.Category;
 import com.hehehe.servicebuilder.service.base.CategoryServiceBaseImpl;
-import com.hehehe.util.comparator.CategoryNameComparator;
 import com.liferay.portal.aop.AopService;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
@@ -23,28 +22,51 @@ import org.osgi.service.component.annotations.Component;
 @Component(property = { "json.web.service.context.name=bookservicebuilder",
 		"json.web.service.context.path=Category" }, service = AopService.class)
 public class CategoryServiceImpl extends CategoryServiceBaseImpl {
+	
+//	CREATE
+	
 	public Category addCategory(String name) {
 		return categoryLocalService.addCategory(name);
 	}
+	
+//	READ
+	
 	public Category getCategoryById(String categoryId) throws PortalException {
 		return categoryLocalService.getCategory(categoryId);
 	}
+	
+	public List<Category> getCategories(int start, int end, OrderByComparator<Category> obc){
+		return categoryLocalService.getCategories(start,end, obc);
+	}
+	
+	public List<Category> getCategories(){
+		return categoryLocalService.getCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+	
+	public Category getCategoryByBookId(String bookId) throws PortalException {
+		return categoryLocalService.getCategoryByBookId(bookId);
+	}
+	
+//	UPDATE
+	
 	public Category updateCategory(Category category) {
 		return categoryLocalService.updateCategory(category);
 	}
+	
+//	DELETE
+	
 	public Category deleteCategory(String categoryId) throws PortalException{
 		return categoryLocalService.deleteCategory(categoryId);
 	}
-	public List<Category> getCategories(int start, int end, OrderByComparator<Category> obc){
-		return categoryLocalService.getCategoriesSorted(start,end, obc);
-	}
-	public List<Category> getAllCategory(){
-		return categoryLocalService.getCategoriesSorted(0, getCategoriesCount(), new CategoryNameComparator());
-	}
-	public List<Book> getBooks(int start, int end, OrderByComparator<Book> obc, String categoryId){
-		return categoryLocalService.getBooks(start,end,obc,categoryId);
-	}
+	
+//	LOGIC METHOD
+
 	public int getCategoriesCount() {
 		return categoryLocalService.getCategoriesCount();
 	}
+	
+	public boolean isExist(String name) {
+		return categoryLocalService.isExist(name);
+	}
+	
 }

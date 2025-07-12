@@ -27,7 +27,7 @@ public class SubtitleUpdateRenderMvcCommand implements MVCRenderCommand{
 		// TODO Auto-generated method stub
 		String subtitleId = ParamUtil.getString(renderRequest, "subtitleId");
 		try {
-			renderRequest.setAttribute("subtilte", subtitleService.getSubtitleById(subtitleId));
+			renderRequest.setAttribute("subtitle", subtitleService.getSubtitleById(subtitleId));
 		} catch (PortalException e) {
 			SessionErrors.add(renderRequest, "invalid-subtilte");
 		}

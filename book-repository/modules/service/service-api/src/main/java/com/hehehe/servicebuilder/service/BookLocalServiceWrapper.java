@@ -31,6 +31,13 @@ public class BookLocalServiceWrapper
 		_bookLocalService.addAuthers(autherIds, bookId);
 	}
 
+	@Override
+	public void addAuthers(
+		java.util.List<String> autherIds, String bookId, java.util.Date date) {
+
+		_bookLocalService.addAuthers(autherIds, bookId, date);
+	}
+
 	/**
 	 * Adds the book to the database. Also notifies the appropriate model listeners.
 	 *
@@ -50,13 +57,18 @@ public class BookLocalServiceWrapper
 
 	@Override
 	public com.hehehe.servicebuilder.model.Book addBook(
-		String title, String description, String thumbnail, String subtitleId,
-		String categoryId, Integer price, Integer stock, Integer pages,
-		Integer publicYear) {
+		java.util.List<String> authorIds, String title, String description,
+		String thumbnail, String subtitleId, String categoryId, Integer price,
+		Integer stock, Integer pages, Integer publicYear) {
 
 		return _bookLocalService.addBook(
-			title, description, thumbnail, subtitleId, categoryId, price, stock,
-			pages, publicYear);
+			authorIds, title, description, thumbnail, subtitleId, categoryId,
+			price, stock, pages, publicYear);
+	}
+
+	@Override
+	public void changeAuthors(java.util.List<String> authorIds, String bookId) {
+		_bookLocalService.changeAuthors(authorIds, bookId);
 	}
 
 	/**
@@ -117,17 +129,19 @@ public class BookLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteBooksByCategoryId(String categoryId)
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+			deleteBooksByCategoryId(String categoryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		_bookLocalService.deleteBooksByCategoryId(categoryId);
+		return _bookLocalService.deleteBooksByCategoryId(categoryId);
 	}
 
 	@Override
-	public void deleteBooksBySubtitleId(String subtitleId)
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+			deleteBooksBySubtitleId(String subtitleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		_bookLocalService.deleteBooksBySubtitleId(subtitleId);
+		return _bookLocalService.deleteBooksBySubtitleId(subtitleId);
 	}
 
 	/**
@@ -247,14 +261,6 @@ public class BookLocalServiceWrapper
 		return _bookLocalService.fetchBook(bookId);
 	}
 
-	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Author> getAuthors(
-			String bookId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _bookLocalService.getAuthors(bookId);
-	}
-
 	/**
 	 * Returns the book with the primary key.
 	 *
@@ -287,6 +293,73 @@ public class BookLocalServiceWrapper
 		return _bookLocalService.getBooks(start, end);
 	}
 
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<com.hehehe.servicebuilder.model.Book> obc) {
+
+		return _bookLocalService.getBooks(start, end, obc);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+			getBooksByAuthorId(String authorId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _bookLocalService.getBooksByAuthorId(authorId);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksByCategoryId(String categoryId) {
+
+		return _bookLocalService.getBooksByCategoryId(categoryId);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksByCategoryId(String categoryId, int start, int end) {
+
+		return _bookLocalService.getBooksByCategoryId(categoryId, start, end);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksByCategoryId(
+			String categoryId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.hehehe.servicebuilder.model.Book> obc) {
+
+		return _bookLocalService.getBooksByCategoryId(
+			categoryId, start, end, obc);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksBySubtitleId(String subtitleId) {
+
+		return _bookLocalService.getBooksBySubtitleId(subtitleId);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksBySubtitleId(String subtitleId, int start, int end) {
+
+		return _bookLocalService.getBooksBySubtitleId(subtitleId, start, end);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksBySubtitleId(
+			String subtitleId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.hehehe.servicebuilder.model.Book> obc) {
+
+		return _bookLocalService.getBooksBySubtitleId(
+			subtitleId, start, end, obc);
+	}
+
 	/**
 	 * Returns the number of books.
 	 *
@@ -295,15 +368,6 @@ public class BookLocalServiceWrapper
 	@Override
 	public int getBooksCount() {
 		return _bookLocalService.getBooksCount();
-	}
-
-	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Book> getBooksSorted(
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<com.hehehe.servicebuilder.model.Book> obc) {
-
-		return _bookLocalService.getBooksSorted(start, end, obc);
 	}
 
 	/**

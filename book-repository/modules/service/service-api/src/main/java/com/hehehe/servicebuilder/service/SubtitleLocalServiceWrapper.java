@@ -230,23 +230,6 @@ public class SubtitleLocalServiceWrapper
 		return _subtitleLocalService.fetchSubtitle(subtitleId);
 	}
 
-	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Book> getAllBook(
-		String subtitleId) {
-
-		return _subtitleLocalService.getAllBook(subtitleId);
-	}
-
-	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<com.hehehe.servicebuilder.model.Book> obc,
-		String subtitleId) {
-
-		return _subtitleLocalService.getBooks(start, end, obc, subtitleId);
-	}
-
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -283,6 +266,14 @@ public class SubtitleLocalServiceWrapper
 		return _subtitleLocalService.getSubtitle(subtitleId);
 	}
 
+	@Override
+	public com.hehehe.servicebuilder.model.Subtitle getSubtitleByBookId(
+			String bookId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _subtitleLocalService.getSubtitleByBookId(bookId);
+	}
+
 	/**
 	 * Returns a range of all the subtitles.
 	 *
@@ -301,6 +292,16 @@ public class SubtitleLocalServiceWrapper
 		return _subtitleLocalService.getSubtitles(start, end);
 	}
 
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Subtitle>
+		getSubtitles(
+			int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.hehehe.servicebuilder.model.Subtitle> obc) {
+
+		return _subtitleLocalService.getSubtitles(start, end, obc);
+	}
+
 	/**
 	 * Returns the number of subtitles.
 	 *
@@ -312,13 +313,8 @@ public class SubtitleLocalServiceWrapper
 	}
 
 	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Subtitle>
-		getSubtitlesSorted(
-			int start, int end,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<com.hehehe.servicebuilder.model.Subtitle> obc) {
-
-		return _subtitleLocalService.getSubtitlesSorted(start, end, obc);
+	public boolean isExist(String name) {
+		return _subtitleLocalService.isExist(name);
 	}
 
 	/**

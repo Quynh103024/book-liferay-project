@@ -256,6 +256,23 @@ public class AuthorLocalServiceWrapper
 		return _authorLocalService.getAuthors(start, end);
 	}
 
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Author> getAuthors(
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<com.hehehe.servicebuilder.model.Author> obc) {
+
+		return _authorLocalService.getAuthors(start, end, obc);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Author>
+			getAuthorsByBookId(String bookId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _authorLocalService.getAuthorsByBookId(bookId);
+	}
+
 	/**
 	 * Returns the number of authors.
 	 *
@@ -264,24 +281,6 @@ public class AuthorLocalServiceWrapper
 	@Override
 	public int getAuthorsCount() {
 		return _authorLocalService.getAuthorsCount();
-	}
-
-	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Author>
-		getAuthorsSorted(
-			int start, int end,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<com.hehehe.servicebuilder.model.Author> obc) {
-
-		return _authorLocalService.getAuthorsSorted(start, end, obc);
-	}
-
-	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
-			String authorId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _authorLocalService.getBooks(authorId);
 	}
 
 	/**
@@ -303,6 +302,11 @@ public class AuthorLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _authorLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	@Override
+	public boolean isExist(String name) {
+		return _authorLocalService.isExist(name);
 	}
 
 	/**

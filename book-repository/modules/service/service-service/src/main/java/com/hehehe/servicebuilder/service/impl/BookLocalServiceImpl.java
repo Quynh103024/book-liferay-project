@@ -5,11 +5,11 @@
 
 package com.hehehe.servicebuilder.service.impl;
 
-import com.hehehe.servicebuilder.model.Author;
 import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.model.BookAuthor;
 import com.hehehe.servicebuilder.model.impl.BookAuthorImpl;
 import com.hehehe.servicebuilder.model.impl.BookImpl;
+import com.hehehe.servicebuilder.service.AuthorLocalService;
 import com.hehehe.servicebuilder.service.BookAuthorLocalService;
 import com.hehehe.servicebuilder.service.base.BookLocalServiceBaseImpl;
 
@@ -33,12 +33,17 @@ import org.osgi.service.component.annotations.Reference;
 	service = AopService.class
 )
 public class BookLocalServiceImpl extends BookLocalServiceBaseImpl {
+//	REFERENCE
+	
 	@Reference
 	BookAuthorLocalService bookAuthorLocalService;
-	public Book addBook(String title,String description, String thumbnail, String subtitleId, String categoryId, Integer price, Integer stock, Integer pages, Integer publicYear) {
-		Book book = new BookImpl();
+	
+//	CREATE
+	
+	public Book addBook(List<String> authorIds,String title,String description, String thumbnail, String subtitleId, String categoryId, Integer price, Integer stock, Integer pages, Integer publicYear) {
 		String id = UUID.randomUUID().toString();
 		Date now = new Date();
+		Book book = new BookImpl();
 		book.setBookId(id);
 		book.setTitle(title);
 		book.setDescription(description);
@@ -51,48 +56,90 @@ public class BookLocalServiceImpl extends BookLocalServiceBaseImpl {
 		book.setPublished_year(publicYear);
 		book.setCreateDate(now);
 		book.setModifiedDate(now);
-		return bookLocalService.addBook(book);
+		addAuthers(authorIds, id, now);
+		return super.addBook(book);
 	}
-	public List<Book> getBooksSorted(int start, int end, OrderByComparator<Book> obc){
+	
+//	READ
+	
+	public List<Book> getBooks(int start, int end, OrderByComparator<Book> obc){
 		return bookPersistence.findAll(start, end, obc);
 	}
-	public List<Author> getAuthors(String bookId) throws PortalException {
-		List<BookAuthor> bas = bookAuthorPersistence.findByBookId(bookId);
-		List<Author> authors = new ArrayList<>();
+	
+	public List<Book> getBooksByAuthorId(String authorId) throws PortalException {
+		List<BookAuthor> bas = bookAuthorLocalService.getBookAuthorByAuthorId(authorId);
+		List<Book> books = new ArrayList<>();
 		for(BookAuthor ba : bas) {
-			Author author = authorPersistence.findByPrimaryKey(ba.getAuthorId());
-			authors.add(author);
+			Book book = super.getBook(ba.getBookId());
+			books.add(book);
 		}
-		return authors;
+		return books;
 	}
-	public void deleteBooksByCategoryId(String categoryId) throws PortalException {
-	    List<Book> books = bookPersistence.findByCategoryId(categoryId);
-	    for (Book book : books) {
-	        deleteBook(book.getBookId());
-	    }
+	
+	public List<Book> getBooksByCategoryId(String categoryId){
+		return bookPersistence.findByCategoryId(categoryId);
 	}
-	public void deleteBooksBySubtitleId(String subtitleId) throws PortalException {
-	    List<Book> books = bookPersistence.findBySubtitleId(subtitleId);
-	    for (Book book : books) {
-	        deleteBook(book.getBookId());
-	    }
+	
+	public List<Book> getBooksByCategoryId(String categoryId, int start, int end){
+		return bookPersistence.findByCategoryId(categoryId, start, end);
 	}
-	@Override
-	public Book deleteBook(String bookId) throws PortalException {
-		bookAuthorPersistence.removeByBookId(bookId);
-		return bookPersistence.remove(bookId);
+	
+	public List<Book> getBooksByCategoryId(String categoryId, int start, int end, OrderByComparator<Book> obc){
+		return bookPersistence.findByCategoryId(categoryId, start, end, obc);
 	}
+	
+	public List<Book> getBooksBySubtitleId(String subtitleId){
+		return bookPersistence.findBySubtitleId(subtitleId);
+	}
+	
+	public List<Book> getBooksBySubtitleId(String subtitleId, int start, int end){
+		return bookPersistence.findBySubtitleId(subtitleId, start, end);
+	}
+	
+	public List<Book> getBooksBySubtitleId(String subtitleId, int start, int end, OrderByComparator<Book> obc){
+		return bookPersistence.findBySubtitleId(subtitleId, start, end, obc);
+	}
+	
+//	UPDATE
+	
 	@Override
 	public Book updateBook(Book book) {
 		Date now = new Date();
 		book.setModifiedDate(now);
-		List<BookAuthor> bas = bookAuthorPersistence.findByBookId(book.getBookId());
+		List<BookAuthor> bas = bookAuthorLocalService.getBookAuthorByBookId(book.getBookId());
 		for(BookAuthor ba : bas) {
 			ba.setModifiedDate(now);
-			bookAuthorPersistence.update(ba);
+			bookAuthorLocalService.updateBookAuthor(ba);
 		}
-		return bookPersistence.update(book);
+		return super.updateBook(book);
 	}
+
+//	DELETE
+	
+	public List<Book> deleteBooksByCategoryId(String categoryId) throws PortalException {
+	    List<Book> books = bookPersistence.findByCategoryId(categoryId);
+	    for (Book book : books) {
+	        super.deleteBook(book.getBookId());
+	    }
+	    return books;
+	}
+	
+	public List<Book> deleteBooksBySubtitleId(String subtitleId) throws PortalException {
+	    List<Book> books = bookPersistence.findBySubtitleId(subtitleId);
+	    for (Book book : books) {
+	    	super.deleteBook(book.getBookId());
+	    }
+	    return books;
+	}
+	
+	@Override
+	public Book deleteBook(String bookId) throws PortalException {
+		bookAuthorLocalService.deleteBookAuthorByBookId(bookId);
+		return super.deleteBook(bookId);
+	}
+	
+//	LOGIC METHOD
+	
 	public void addAuthers(List<String> autherIds, String bookId) {
 		Date now = new Date();
 		for(String id : autherIds) {
@@ -103,5 +150,21 @@ public class BookLocalServiceImpl extends BookLocalServiceBaseImpl {
 			ba.setModifiedDate(now);
 			bookAuthorLocalService.addBookAuthor(ba);
 		}
+	}
+	
+	public void addAuthers(List<String> autherIds, String bookId, Date date) {
+		for(String id : autherIds) {
+			BookAuthor ba = new BookAuthorImpl();
+			ba.setAuthorId(id);
+			ba.setBookId(bookId);
+			ba.setCreateDate(date);
+			ba.setModifiedDate(date);
+			bookAuthorLocalService.addBookAuthor(ba);
+		}
+	}
+	
+	public void changeAuthors(List<String> authorIds,String bookId) {
+		bookAuthorLocalService.deleteBookAuthorByBookId(bookId);
+		addAuthers(authorIds, bookId);
 	}
 }

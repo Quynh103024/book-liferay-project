@@ -113,6 +113,147 @@ public class AuthorServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.hehehe.servicebuilder.model.Author>
+		getAuthors(
+			HttpPrincipal httpPrincipal, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.hehehe.servicebuilder.model.Author> obc) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				AuthorServiceUtil.class, "getAuthors",
+				_getAuthorsParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, start, end, obc);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Author>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.hehehe.servicebuilder.model.Author>
+		getAuthors(HttpPrincipal httpPrincipal, int start, int end) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				AuthorServiceUtil.class, "getAuthors",
+				_getAuthorsParameterTypes3);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, start, end);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Author>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.hehehe.servicebuilder.model.Author>
+		getAuthors(HttpPrincipal httpPrincipal) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				AuthorServiceUtil.class, "getAuthors",
+				_getAuthorsParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Author>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.hehehe.servicebuilder.model.Author>
+			getAuthorsByBookId(HttpPrincipal httpPrincipal, String bookId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				AuthorServiceUtil.class, "getAuthorsByBookId",
+				_getAuthorsByBookIdParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, bookId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Author>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	public static com.hehehe.servicebuilder.model.Author updateAuthor(
 		HttpPrincipal httpPrincipal,
 		com.hehehe.servicebuilder.model.Author author) {
@@ -120,7 +261,7 @@ public class AuthorServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				AuthorServiceUtil.class, "updateAuthor",
-				_updateAuthorParameterTypes2);
+				_updateAuthorParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, author);
 
@@ -152,7 +293,7 @@ public class AuthorServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				AuthorServiceUtil.class, "deleteAuthor",
-				_deleteAuthorParameterTypes3);
+				_deleteAuthorParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, authorId);
@@ -185,19 +326,12 @@ public class AuthorServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.hehehe.servicebuilder.model.Author>
-		getAuthors(
-			HttpPrincipal httpPrincipal, int start, int end,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<com.hehehe.servicebuilder.model.Author> obc) {
-
+	public static boolean isExist(HttpPrincipal httpPrincipal, String name) {
 		try {
 			MethodKey methodKey = new MethodKey(
-				AuthorServiceUtil.class, "getAuthors",
-				_getAuthorsParameterTypes4);
+				AuthorServiceUtil.class, "isExist", _isExistParameterTypes8);
 
-			MethodHandler methodHandler = new MethodHandler(
-				methodKey, start, end, obc);
+			MethodHandler methodHandler = new MethodHandler(methodKey, name);
 
 			Object returnObj = null;
 
@@ -209,80 +343,7 @@ public class AuthorServiceHttp {
 					exception);
 			}
 
-			return (java.util.List<com.hehehe.servicebuilder.model.Author>)
-				returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException
-					systemException) {
-
-			_log.error(systemException, systemException);
-
-			throw systemException;
-		}
-	}
-
-	public static java.util.List<com.hehehe.servicebuilder.model.Author>
-		getAllAuthor(HttpPrincipal httpPrincipal) {
-
-		try {
-			MethodKey methodKey = new MethodKey(
-				AuthorServiceUtil.class, "getAllAuthor",
-				_getAllAuthorParameterTypes5);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception exception) {
-				throw new com.liferay.portal.kernel.exception.SystemException(
-					exception);
-			}
-
-			return (java.util.List<com.hehehe.servicebuilder.model.Author>)
-				returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException
-					systemException) {
-
-			_log.error(systemException, systemException);
-
-			throw systemException;
-		}
-	}
-
-	public static java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
-			HttpPrincipal httpPrincipal, String authorId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		try {
-			MethodKey methodKey = new MethodKey(
-				AuthorServiceUtil.class, "getBooks", _getBooksParameterTypes6);
-
-			MethodHandler methodHandler = new MethodHandler(
-				methodKey, authorId);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception exception) {
-				if (exception instanceof
-						com.liferay.portal.kernel.exception.PortalException) {
-
-					throw (com.liferay.portal.kernel.exception.PortalException)
-						exception;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(
-					exception);
-			}
-
-			return (java.util.List<com.hehehe.servicebuilder.model.Book>)
-				returnObj;
+			return ((Boolean)returnObj).booleanValue();
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException
 					systemException) {
@@ -297,7 +358,7 @@ public class AuthorServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				AuthorServiceUtil.class, "getAuthorCount",
-				_getAuthorCountParameterTypes7);
+				_getAuthorCountParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
@@ -329,22 +390,26 @@ public class AuthorServiceHttp {
 	};
 	private static final Class<?>[] _getAuthorByIdParameterTypes1 =
 		new Class[] {String.class};
-	private static final Class<?>[] _updateAuthorParameterTypes2 = new Class[] {
-		com.hehehe.servicebuilder.model.Author.class
-	};
-	private static final Class<?>[] _deleteAuthorParameterTypes3 = new Class[] {
-		String.class
-	};
-	private static final Class<?>[] _getAuthorsParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getAuthorsParameterTypes2 = new Class[] {
 		int.class, int.class,
 		com.liferay.portal.kernel.util.OrderByComparator.class
 	};
-	private static final Class<?>[] _getAllAuthorParameterTypes5 =
-		new Class[] {};
-	private static final Class<?>[] _getBooksParameterTypes6 = new Class[] {
+	private static final Class<?>[] _getAuthorsParameterTypes3 = new Class[] {
+		int.class, int.class
+	};
+	private static final Class<?>[] _getAuthorsParameterTypes4 = new Class[] {};
+	private static final Class<?>[] _getAuthorsByBookIdParameterTypes5 =
+		new Class[] {String.class};
+	private static final Class<?>[] _updateAuthorParameterTypes6 = new Class[] {
+		com.hehehe.servicebuilder.model.Author.class
+	};
+	private static final Class<?>[] _deleteAuthorParameterTypes7 = new Class[] {
 		String.class
 	};
-	private static final Class<?>[] _getAuthorCountParameterTypes7 =
+	private static final Class<?>[] _isExistParameterTypes8 = new Class[] {
+		String.class
+	};
+	private static final Class<?>[] _getAuthorCountParameterTypes9 =
 		new Class[] {};
 
 }

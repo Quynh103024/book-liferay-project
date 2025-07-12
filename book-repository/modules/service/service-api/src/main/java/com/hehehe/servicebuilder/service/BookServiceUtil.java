@@ -37,13 +37,17 @@ public class BookServiceUtil {
 	}
 
 	public static Book addBook(
-		String title, String description, String thumbnail, String subtitleId,
-		String categoryId, Integer price, Integer stock, Integer pages,
-		Integer publicYear) {
+		List<String> authorIds, String title, String description,
+		String thumbnail, String subtitleId, String categoryId, Integer price,
+		Integer stock, Integer pages, Integer publicYear) {
 
 		return getService().addBook(
-			title, description, thumbnail, subtitleId, categoryId, price, stock,
-			pages, publicYear);
+			authorIds, title, description, thumbnail, subtitleId, categoryId,
+			price, stock, pages, publicYear);
+	}
+
+	public static void changeAuthors(List<String> authorIds, String bookId) {
+		getService().changeAuthors(authorIds, bookId);
 	}
 
 	public static Book deleteBook(String bookId) throws PortalException {
@@ -62,25 +66,60 @@ public class BookServiceUtil {
 		getService().deleteBooksBySubtitleId(subtitleId);
 	}
 
-	public static List<Book> getAllBook() {
-		return getService().getAllBook();
+	public static Book getBookById(String bookId) throws PortalException {
+		return getService().getBookById(bookId);
 	}
 
-	public static List<com.hehehe.servicebuilder.model.Author> getAuthors(
-			String bookId)
-		throws PortalException {
-
-		return getService().getAuthors(bookId);
+	public static List<Book> getBooks() {
+		return getService().getBooks();
 	}
 
-	public static Book getBook(String bookId) throws PortalException {
-		return getService().getBook(bookId);
+	public static List<Book> getBooks(int start, int end) {
+		return getService().getBooks(start, end);
 	}
 
 	public static List<Book> getBooks(
 		int start, int end, OrderByComparator<Book> obc) {
 
 		return getService().getBooks(start, end, obc);
+	}
+
+	public static List<Book> getBooksByAuthorId(String authorId)
+		throws PortalException {
+
+		return getService().getBooksByAuthorId(authorId);
+	}
+
+	public static List<Book> getBooksByCategoryId(String categoryId) {
+		return getService().getBooksByCategoryId(categoryId);
+	}
+
+	public static List<Book> getBooksByCategoryId(
+		String categoryId, int start, int end) {
+
+		return getService().getBooksByCategoryId(categoryId, start, end);
+	}
+
+	public static List<Book> getBooksByCategoryId(
+		String categoryId, int start, int end, OrderByComparator<Book> obc) {
+
+		return getService().getBooksByCategoryId(categoryId, start, end, obc);
+	}
+
+	public static List<Book> getBooksBySubtitleId(String subtitleId) {
+		return getService().getBooksBySubtitleId(subtitleId);
+	}
+
+	public static List<Book> getBooksBySubtitleId(
+		String subtitleId, int start, int end) {
+
+		return getService().getBooksBySubtitleId(subtitleId, start, end);
+	}
+
+	public static List<Book> getBooksBySubtitleId(
+		String subtitleId, int start, int end, OrderByComparator<Book> obc) {
+
+		return getService().getBooksBySubtitleId(subtitleId, start, end, obc);
 	}
 
 	public static int getBooksCount() {

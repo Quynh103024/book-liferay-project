@@ -5,7 +5,6 @@
 
 package com.hehehe.servicebuilder.service;
 
-import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.model.Category;
 
 import com.liferay.petra.sql.dsl.query.DSLQuery;
@@ -192,13 +191,6 @@ public interface CategoryLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Category fetchCategory(String categoryId);
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Book> getAllBooks(String categoryId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Book> getBooks(
-		int start, int end, OrderByComparator<Book> obc, String categoryId);
-
 	/**
 	 * Returns a range of all the categories.
 	 *
@@ -213,6 +205,10 @@ public interface CategoryLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Category> getCategories(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Category> getCategories(
+		int start, int end, OrderByComparator<Category> obc);
+
 	/**
 	 * Returns the number of categories.
 	 *
@@ -220,10 +216,6 @@ public interface CategoryLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCategoriesCount();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Category> getCategoriesSorted(
-		int start, int end, OrderByComparator<Category> obc);
 
 	/**
 	 * Returns the category with the primary key.
@@ -234,6 +226,9 @@ public interface CategoryLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Category getCategory(String categoryId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Category getCategoryByBookId(String bookId) throws PortalException;
 
 	/**
 	 * Returns the OSGi service identifier.
@@ -249,6 +244,9 @@ public interface CategoryLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isExist(String name);
 
 	/**
 	 * Updates the category in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

@@ -30,37 +30,57 @@ import org.osgi.service.component.annotations.Reference;
 	service = AopService.class
 )
 public class SubtitleLocalServiceImpl extends SubtitleLocalServiceBaseImpl {
+
+//	REFERENCE
+	
 	@Reference
 	private BookLocalService bookLocalService;
+
+//	CREATE
 	
 	public Subtitle addSubtitle(String name) {
-		Subtitle subtitle = new SubtitleImpl();
 		String id = UUID.randomUUID().toString();
 		Date now = new Date();
+		Subtitle subtitle = new SubtitleImpl();
 		subtitle.setSubtitleId(id);
 		subtitle.setName(name);
 		subtitle.setCreateDate(now);
 		subtitle.setModifiedDate(now);
-		return subtitleLocalService.addSubtitle(subtitle);
+		return super.addSubtitle(subtitle);
 	}
-	public List<Subtitle> getSubtitlesSorted(int start, int end, OrderByComparator<Subtitle> obc){
+	
+//	READ
+	
+	public List<Subtitle> getSubtitles(int start, int end, OrderByComparator<Subtitle> obc){
 		return subtitlePersistence.findAll(start, end, obc);
 	}
-	public List<Book> getBooks(int start, int end, OrderByComparator<Book> obc, String subtitleId){
-		return bookPersistence.findBySubtitleId(subtitleId, start, end, obc);
+	
+	public Subtitle getSubtitleByBookId(String bookId) throws PortalException {
+		Book book = bookLocalService.getBook(bookId);
+		return super.getSubtitle(book.getSubtitleId());
 	}
-	public List<Book> getAllBook(String subtitleId){
-		return bookPersistence.findBySubtitleId(subtitleId);
-	}
+	
+//	UPDATE
+	
 	@Override
 	public Subtitle updateSubtitle(Subtitle subtitle) {
 		Date now = new Date();
 		subtitle.setModifiedDate(now);
-		return subtitlePersistence.update(subtitle);
+		return super.updateSubtitle(subtitle);
 	}
+	
+//	DELETE
+	
 	@Override
 	public Subtitle deleteSubtitle(String subtitleId) throws PortalException {
 		bookLocalService.deleteBooksBySubtitleId(subtitleId);
-		return subtitlePersistence.remove(subtitleId);
+		return super.deleteSubtitle(subtitleId);
 	}
+	
+//	LOGIC METHOD
+
+	public boolean isExist(String name) {
+		return subtitlePersistence.fetchByName(name) != null;
+	}
+	
 }

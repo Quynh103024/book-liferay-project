@@ -51,7 +51,7 @@ public class BookCreateActionMvcCommand extends BaseMVCActionCommand {
 	        return;
 	    }
 	    System.out.println(" success");
-		this.bookService.addBook(title, description, thumbnail, subtitleId, categoryId, price, stock, pages, publicYear);
+		this.bookService.addBook(null,title, description, thumbnail, subtitleId, categoryId, price, stock, pages, publicYear);
 	}
 }
 

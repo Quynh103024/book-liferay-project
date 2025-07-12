@@ -205,20 +205,6 @@ public class SubtitleLocalServiceUtil {
 		return getService().fetchSubtitle(subtitleId);
 	}
 
-	public static List<com.hehehe.servicebuilder.model.Book> getAllBook(
-		String subtitleId) {
-
-		return getService().getAllBook(subtitleId);
-	}
-
-	public static List<com.hehehe.servicebuilder.model.Book> getBooks(
-		int start, int end,
-		OrderByComparator<com.hehehe.servicebuilder.model.Book> obc,
-		String subtitleId) {
-
-		return getService().getBooks(start, end, obc, subtitleId);
-	}
-
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -250,6 +236,12 @@ public class SubtitleLocalServiceUtil {
 		return getService().getSubtitle(subtitleId);
 	}
 
+	public static Subtitle getSubtitleByBookId(String bookId)
+		throws PortalException {
+
+		return getService().getSubtitleByBookId(bookId);
+	}
+
 	/**
 	 * Returns a range of all the subtitles.
 	 *
@@ -265,6 +257,12 @@ public class SubtitleLocalServiceUtil {
 		return getService().getSubtitles(start, end);
 	}
 
+	public static List<Subtitle> getSubtitles(
+		int start, int end, OrderByComparator<Subtitle> obc) {
+
+		return getService().getSubtitles(start, end, obc);
+	}
+
 	/**
 	 * Returns the number of subtitles.
 	 *
@@ -274,10 +272,8 @@ public class SubtitleLocalServiceUtil {
 		return getService().getSubtitlesCount();
 	}
 
-	public static List<Subtitle> getSubtitlesSorted(
-		int start, int end, OrderByComparator<Subtitle> obc) {
-
-		return getService().getSubtitlesSorted(start, end, obc);
+	public static boolean isExist(String name) {
+		return getService().isExist(name);
 	}
 
 	/**

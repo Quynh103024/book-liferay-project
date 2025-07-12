@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
@@ -33,14 +34,17 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.Serializable;
 
 import java.lang.reflect.InvocationHandler;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.sql.DataSource;
@@ -81,6 +85,194 @@ public class AuthorPersistenceImpl
 	private FinderPath _finderPathWithPaginationFindAll;
 	private FinderPath _finderPathWithoutPaginationFindAll;
 	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathFetchByName;
+
+	/**
+	 * Returns the author where name = &#63; or throws a <code>NoSuchAuthorException</code> if it could not be found.
+	 *
+	 * @param name the name
+	 * @return the matching author
+	 * @throws NoSuchAuthorException if a matching author could not be found
+	 */
+	@Override
+	public Author findByName(String name) throws NoSuchAuthorException {
+		Author author = fetchByName(name);
+
+		if (author == null) {
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			sb.append("name=");
+			sb.append(name);
+
+			sb.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(sb.toString());
+			}
+
+			throw new NoSuchAuthorException(sb.toString());
+		}
+
+		return author;
+	}
+
+	/**
+	 * Returns the author where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param name the name
+	 * @return the matching author, or <code>null</code> if a matching author could not be found
+	 */
+	@Override
+	public Author fetchByName(String name) {
+		return fetchByName(name, true);
+	}
+
+	/**
+	 * Returns the author where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param name the name
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching author, or <code>null</code> if a matching author could not be found
+	 */
+	@Override
+	public Author fetchByName(String name, boolean useFinderCache) {
+		name = Objects.toString(name, "");
+
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {name};
+		}
+
+		Object result = null;
+
+		if (useFinderCache) {
+			result = finderCache.getResult(
+				_finderPathFetchByName, finderArgs, this);
+		}
+
+		if (result instanceof Author) {
+			Author author = (Author)result;
+
+			if (!Objects.equals(name, author.getName())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler sb = new StringBundler(3);
+
+			sb.append(_SQL_SELECT_AUTHOR_WHERE);
+
+			boolean bindName = false;
+
+			if (name.isEmpty()) {
+				sb.append(_FINDER_COLUMN_NAME_NAME_3);
+			}
+			else {
+				bindName = true;
+
+				sb.append(_FINDER_COLUMN_NAME_NAME_2);
+			}
+
+			String sql = sb.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query query = session.createQuery(sql);
+
+				QueryPos queryPos = QueryPos.getInstance(query);
+
+				if (bindName) {
+					queryPos.add(name);
+				}
+
+				List<Author> list = query.list();
+
+				if (list.isEmpty()) {
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByName, finderArgs, list);
+					}
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {name};
+							}
+
+							_log.warn(
+								"AuthorPersistenceImpl.fetchByName(String, boolean) with parameters (" +
+									StringUtil.merge(finderArgs) +
+										") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					Author author = list.get(0);
+
+					result = author;
+
+					cacheResult(author);
+				}
+			}
+			catch (Exception exception) {
+				throw processException(exception);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (Author)result;
+		}
+	}
+
+	/**
+	 * Removes the author where name = &#63; from the database.
+	 *
+	 * @param name the name
+	 * @return the author that was removed
+	 */
+	@Override
+	public Author removeByName(String name) throws NoSuchAuthorException {
+		Author author = findByName(name);
+
+		return remove(author);
+	}
+
+	/**
+	 * Returns the number of authors where name = &#63;.
+	 *
+	 * @param name the name
+	 * @return the number of matching authors
+	 */
+	@Override
+	public int countByName(String name) {
+		Author author = fetchByName(name);
+
+		if (author == null) {
+			return 0;
+		}
+
+		return 1;
+	}
+
+	private static final String _FINDER_COLUMN_NAME_NAME_2 = "author.name = ?";
+
+	private static final String _FINDER_COLUMN_NAME_NAME_3 =
+		"(author.name IS NULL OR author.name = '')";
 
 	public AuthorPersistenceImpl() {
 		setModelClass(Author.class);
@@ -99,6 +291,9 @@ public class AuthorPersistenceImpl
 	@Override
 	public void cacheResult(Author author) {
 		entityCache.putResult(AuthorImpl.class, author.getPrimaryKey(), author);
+
+		finderCache.putResult(
+			_finderPathFetchByName, new Object[] {author.getName()}, author);
 	}
 
 	private int _valueObjectFinderCacheListThreshold;
@@ -166,6 +361,12 @@ public class AuthorPersistenceImpl
 		for (Serializable primaryKey : primaryKeys) {
 			entityCache.removeResult(AuthorImpl.class, primaryKey);
 		}
+	}
+
+	protected void cacheUniqueFindersCache(AuthorModelImpl authorModelImpl) {
+		Object[] args = new Object[] {authorModelImpl.getName()};
+
+		finderCache.putResult(_finderPathFetchByName, args, authorModelImpl);
 	}
 
 	/**
@@ -328,7 +529,9 @@ public class AuthorPersistenceImpl
 			closeSession(session);
 		}
 
-		entityCache.putResult(AuthorImpl.class, author, false, true);
+		entityCache.putResult(AuthorImpl.class, authorModelImpl, false, true);
+
+		cacheUniqueFindersCache(authorModelImpl);
 
 		if (isNew) {
 			author.setNew(false);
@@ -608,6 +811,10 @@ public class AuthorPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0], new String[0], false);
 
+		_finderPathFetchByName = new FinderPath(
+			FINDER_CLASS_NAME_ENTITY, "fetchByName",
+			new String[] {String.class.getName()}, new String[] {"name"}, true);
+
 		AuthorUtil.setPersistence(this);
 	}
 
@@ -653,13 +860,22 @@ public class AuthorPersistenceImpl
 	private static final String _SQL_SELECT_AUTHOR =
 		"SELECT author FROM Author author";
 
+	private static final String _SQL_SELECT_AUTHOR_WHERE =
+		"SELECT author FROM Author author WHERE ";
+
 	private static final String _SQL_COUNT_AUTHOR =
 		"SELECT COUNT(author) FROM Author author";
+
+	private static final String _SQL_COUNT_AUTHOR_WHERE =
+		"SELECT COUNT(author) FROM Author author WHERE ";
 
 	private static final String _ORDER_BY_ENTITY_ALIAS = "author.";
 
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
 		"No Author exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No Author exists with the key {";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		AuthorPersistenceImpl.class);

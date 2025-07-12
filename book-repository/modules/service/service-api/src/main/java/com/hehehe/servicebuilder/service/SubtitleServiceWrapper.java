@@ -38,23 +38,6 @@ public class SubtitleServiceWrapper
 		return _subtitleService.deleteSubtitle(subtitleId);
 	}
 
-	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Subtitle>
-		getAllSubtitle() {
-
-		return _subtitleService.getAllSubtitle();
-	}
-
-	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<com.hehehe.servicebuilder.model.Book> obc,
-		String subtitleId) {
-
-		return _subtitleService.getBooks(start, end, obc, subtitleId);
-	}
-
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -66,11 +49,26 @@ public class SubtitleServiceWrapper
 	}
 
 	@Override
+	public com.hehehe.servicebuilder.model.Subtitle getSubtitleByBookId(
+			String bookId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _subtitleService.getSubtitleByBookId(bookId);
+	}
+
+	@Override
 	public com.hehehe.servicebuilder.model.Subtitle getSubtitleById(
 			String subtitleId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _subtitleService.getSubtitleById(subtitleId);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Subtitle>
+		getSubtitles() {
+
+		return _subtitleService.getSubtitles();
 	}
 
 	@Override
@@ -86,6 +84,11 @@ public class SubtitleServiceWrapper
 	@Override
 	public int getSubtitlesCount() {
 		return _subtitleService.getSubtitlesCount();
+	}
+
+	@Override
+	public boolean isExist(String name) {
+		return _subtitleService.isExist(name);
 	}
 
 	@Override

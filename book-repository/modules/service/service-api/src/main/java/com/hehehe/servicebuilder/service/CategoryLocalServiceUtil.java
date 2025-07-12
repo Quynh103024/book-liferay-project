@@ -206,20 +206,6 @@ public class CategoryLocalServiceUtil {
 		return getService().fetchCategory(categoryId);
 	}
 
-	public static List<com.hehehe.servicebuilder.model.Book> getAllBooks(
-		String categoryId) {
-
-		return getService().getAllBooks(categoryId);
-	}
-
-	public static List<com.hehehe.servicebuilder.model.Book> getBooks(
-		int start, int end,
-		OrderByComparator<com.hehehe.servicebuilder.model.Book> obc,
-		String categoryId) {
-
-		return getService().getBooks(start, end, obc, categoryId);
-	}
-
 	/**
 	 * Returns a range of all the categories.
 	 *
@@ -235,6 +221,12 @@ public class CategoryLocalServiceUtil {
 		return getService().getCategories(start, end);
 	}
 
+	public static List<Category> getCategories(
+		int start, int end, OrderByComparator<Category> obc) {
+
+		return getService().getCategories(start, end, obc);
+	}
+
 	/**
 	 * Returns the number of categories.
 	 *
@@ -242,12 +234,6 @@ public class CategoryLocalServiceUtil {
 	 */
 	public static int getCategoriesCount() {
 		return getService().getCategoriesCount();
-	}
-
-	public static List<Category> getCategoriesSorted(
-		int start, int end, OrderByComparator<Category> obc) {
-
-		return getService().getCategoriesSorted(start, end, obc);
 	}
 
 	/**
@@ -261,6 +247,12 @@ public class CategoryLocalServiceUtil {
 		throws PortalException {
 
 		return getService().getCategory(categoryId);
+	}
+
+	public static Category getCategoryByBookId(String bookId)
+		throws PortalException {
+
+		return getService().getCategoryByBookId(bookId);
 	}
 
 	/**
@@ -279,6 +271,10 @@ public class CategoryLocalServiceUtil {
 		throws PortalException {
 
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	public static boolean isExist(String name) {
+		return getService().isExist(name);
 	}
 
 	/**

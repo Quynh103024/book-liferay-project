@@ -107,6 +107,16 @@ public class BookAuthorLocalServiceWrapper
 		return _bookAuthorLocalService.deleteBookAuthor(bookAuthorPK);
 	}
 
+	@Override
+	public void deleteBookAuthorByAuthorId(String authorId) {
+		_bookAuthorLocalService.deleteBookAuthorByAuthorId(authorId);
+	}
+
+	@Override
+	public void deleteBookAuthorByBookId(String bookId) {
+		_bookAuthorLocalService.deleteBookAuthorByBookId(bookId);
+	}
+
 	/**
 	 * @throws PortalException
 	 */
@@ -242,6 +252,20 @@ public class BookAuthorLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _bookAuthorLocalService.getBookAuthor(bookAuthorPK);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.BookAuthor>
+		getBookAuthorByAuthorId(String authorId) {
+
+		return _bookAuthorLocalService.getBookAuthorByAuthorId(authorId);
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.BookAuthor>
+		getBookAuthorByBookId(String bookId) {
+
+		return _bookAuthorLocalService.getBookAuthorByBookId(bookId);
 	}
 
 	/**

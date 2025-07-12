@@ -230,6 +230,18 @@ public class AuthorLocalServiceUtil {
 		return getService().getAuthors(start, end);
 	}
 
+	public static List<Author> getAuthors(
+		int start, int end, OrderByComparator<Author> obc) {
+
+		return getService().getAuthors(start, end, obc);
+	}
+
+	public static List<Author> getAuthorsByBookId(String bookId)
+		throws PortalException {
+
+		return getService().getAuthorsByBookId(bookId);
+	}
+
 	/**
 	 * Returns the number of authors.
 	 *
@@ -237,19 +249,6 @@ public class AuthorLocalServiceUtil {
 	 */
 	public static int getAuthorsCount() {
 		return getService().getAuthorsCount();
-	}
-
-	public static List<Author> getAuthorsSorted(
-		int start, int end, OrderByComparator<Author> obc) {
-
-		return getService().getAuthorsSorted(start, end, obc);
-	}
-
-	public static List<com.hehehe.servicebuilder.model.Book> getBooks(
-			String authorId)
-		throws PortalException {
-
-		return getService().getBooks(authorId);
 	}
 
 	/**
@@ -268,6 +267,10 @@ public class AuthorLocalServiceUtil {
 		throws PortalException {
 
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	public static boolean isExist(String name) {
+		return getService().isExist(name);
 	}
 
 	/**

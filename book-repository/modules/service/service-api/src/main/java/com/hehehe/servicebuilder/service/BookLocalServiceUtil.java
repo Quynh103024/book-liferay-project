@@ -41,6 +41,12 @@ public class BookLocalServiceUtil {
 		getService().addAuthers(autherIds, bookId);
 	}
 
+	public static void addAuthers(
+		List<String> autherIds, String bookId, java.util.Date date) {
+
+		getService().addAuthers(autherIds, bookId, date);
+	}
+
 	/**
 	 * Adds the book to the database. Also notifies the appropriate model listeners.
 	 *
@@ -56,13 +62,17 @@ public class BookLocalServiceUtil {
 	}
 
 	public static Book addBook(
-		String title, String description, String thumbnail, String subtitleId,
-		String categoryId, Integer price, Integer stock, Integer pages,
-		Integer publicYear) {
+		List<String> authorIds, String title, String description,
+		String thumbnail, String subtitleId, String categoryId, Integer price,
+		Integer stock, Integer pages, Integer publicYear) {
 
 		return getService().addBook(
-			title, description, thumbnail, subtitleId, categoryId, price, stock,
-			pages, publicYear);
+			authorIds, title, description, thumbnail, subtitleId, categoryId,
+			price, stock, pages, publicYear);
+	}
+
+	public static void changeAuthors(List<String> authorIds, String bookId) {
+		getService().changeAuthors(authorIds, bookId);
 	}
 
 	/**
@@ -114,16 +124,16 @@ public class BookLocalServiceUtil {
 		return getService().deleteBook(bookId);
 	}
 
-	public static void deleteBooksByCategoryId(String categoryId)
+	public static List<Book> deleteBooksByCategoryId(String categoryId)
 		throws PortalException {
 
-		getService().deleteBooksByCategoryId(categoryId);
+		return getService().deleteBooksByCategoryId(categoryId);
 	}
 
-	public static void deleteBooksBySubtitleId(String subtitleId)
+	public static List<Book> deleteBooksBySubtitleId(String subtitleId)
 		throws PortalException {
 
-		getService().deleteBooksBySubtitleId(subtitleId);
+		return getService().deleteBooksBySubtitleId(subtitleId);
 	}
 
 	/**
@@ -225,13 +235,6 @@ public class BookLocalServiceUtil {
 		return getService().fetchBook(bookId);
 	}
 
-	public static List<com.hehehe.servicebuilder.model.Author> getAuthors(
-			String bookId)
-		throws PortalException {
-
-		return getService().getAuthors(bookId);
-	}
-
 	/**
 	 * Returns the book with the primary key.
 	 *
@@ -258,6 +261,50 @@ public class BookLocalServiceUtil {
 		return getService().getBooks(start, end);
 	}
 
+	public static List<Book> getBooks(
+		int start, int end, OrderByComparator<Book> obc) {
+
+		return getService().getBooks(start, end, obc);
+	}
+
+	public static List<Book> getBooksByAuthorId(String authorId)
+		throws PortalException {
+
+		return getService().getBooksByAuthorId(authorId);
+	}
+
+	public static List<Book> getBooksByCategoryId(String categoryId) {
+		return getService().getBooksByCategoryId(categoryId);
+	}
+
+	public static List<Book> getBooksByCategoryId(
+		String categoryId, int start, int end) {
+
+		return getService().getBooksByCategoryId(categoryId, start, end);
+	}
+
+	public static List<Book> getBooksByCategoryId(
+		String categoryId, int start, int end, OrderByComparator<Book> obc) {
+
+		return getService().getBooksByCategoryId(categoryId, start, end, obc);
+	}
+
+	public static List<Book> getBooksBySubtitleId(String subtitleId) {
+		return getService().getBooksBySubtitleId(subtitleId);
+	}
+
+	public static List<Book> getBooksBySubtitleId(
+		String subtitleId, int start, int end) {
+
+		return getService().getBooksBySubtitleId(subtitleId, start, end);
+	}
+
+	public static List<Book> getBooksBySubtitleId(
+		String subtitleId, int start, int end, OrderByComparator<Book> obc) {
+
+		return getService().getBooksBySubtitleId(subtitleId, start, end, obc);
+	}
+
 	/**
 	 * Returns the number of books.
 	 *
@@ -265,12 +312,6 @@ public class BookLocalServiceUtil {
 	 */
 	public static int getBooksCount() {
 		return getService().getBooksCount();
-	}
-
-	public static List<Book> getBooksSorted(
-		int start, int end, OrderByComparator<Book> obc) {
-
-		return getService().getBooksSorted(start, end, obc);
 	}
 
 	/**

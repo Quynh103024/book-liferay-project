@@ -138,13 +138,6 @@ public class BookWrapper
 		return model.getBookId();
 	}
 
-	@Override
-	public Category getCategory()
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return model.getCategory();
-	}
-
 	/**
 	 * Returns the category ID of this book.
 	 *
@@ -233,13 +226,6 @@ public class BookWrapper
 	@Override
 	public Integer getStock() {
 		return model.getStock();
-	}
-
-	@Override
-	public Subtitle getSubtitle()
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return model.getSubtitle();
 	}
 
 	/**

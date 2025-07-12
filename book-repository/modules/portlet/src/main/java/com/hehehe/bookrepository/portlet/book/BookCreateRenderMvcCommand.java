@@ -28,9 +28,9 @@ public class BookCreateRenderMvcCommand implements MVCRenderCommand {
 	@Override
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
 		// TODO Auto-generated method stub
-		renderRequest.setAttribute("allAuthor", this.authorService.getAllAuthor());
-		renderRequest.setAttribute("allCategory", this.categoryService.getAllCategory());
-		renderRequest.setAttribute("allSubtitle", this.subtitleService.getAllSubtitle());
+		renderRequest.setAttribute("allAuthor", this.authorService.getAuthors());
+		renderRequest.setAttribute("allCategory", this.categoryService.getCategories());
+		renderRequest.setAttribute("allSubtitle", this.subtitleService.getSubtitles());
 		return "/book/create.jsp";
 	}
 	

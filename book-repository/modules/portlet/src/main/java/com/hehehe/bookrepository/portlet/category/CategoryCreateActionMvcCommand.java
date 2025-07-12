@@ -36,6 +36,6 @@ public class CategoryCreateActionMvcCommand extends BaseMVCActionCommand {
 	    }
 		this.categoryService.addCategory(name);
 	}
-
 }
+
 

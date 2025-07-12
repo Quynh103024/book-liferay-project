@@ -5,7 +5,6 @@
 
 package com.hehehe.servicebuilder.service;
 
-import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.model.Subtitle;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -49,13 +48,6 @@ public interface SubtitleService extends BaseService {
 
 	public Subtitle deleteSubtitle(String subtitleId) throws PortalException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Subtitle> getAllSubtitle();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Book> getBooks(
-		int start, int end, OrderByComparator<Book> obc, String subtitleId);
-
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -64,7 +56,13 @@ public interface SubtitleService extends BaseService {
 	public String getOSGiServiceIdentifier();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Subtitle getSubtitleByBookId(String bookId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Subtitle getSubtitleById(String subtitleId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Subtitle> getSubtitles();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Subtitle> getSubtitles(
@@ -72,6 +70,9 @@ public interface SubtitleService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getSubtitlesCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isExist(String name);
 
 	public Subtitle updateSubtitle(Subtitle subtitle);
 

@@ -38,13 +38,6 @@ public class AuthorServiceWrapper
 	}
 
 	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Author>
-		getAllAuthor() {
-
-		return _authorService.getAllAuthor();
-	}
-
-	@Override
 	public com.hehehe.servicebuilder.model.Author getAuthorById(String authorId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -57,6 +50,18 @@ public class AuthorServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Author> getAuthors() {
+		return _authorService.getAuthors();
+	}
+
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Author> getAuthors(
+		int start, int end) {
+
+		return _authorService.getAuthors(start, end);
+	}
+
+	@Override
 	public java.util.List<com.hehehe.servicebuilder.model.Author> getAuthors(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator
@@ -66,11 +71,11 @@ public class AuthorServiceWrapper
 	}
 
 	@Override
-	public java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
-			String authorId)
+	public java.util.List<com.hehehe.servicebuilder.model.Author>
+			getAuthorsByBookId(String bookId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _authorService.getBooks(authorId);
+		return _authorService.getAuthorsByBookId(bookId);
 	}
 
 	/**
@@ -81,6 +86,11 @@ public class AuthorServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _authorService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public boolean isExist(String name) {
+		return _authorService.isExist(name);
 	}
 
 	@Override

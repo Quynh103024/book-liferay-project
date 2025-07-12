@@ -43,16 +43,17 @@ import com.liferay.portal.kernel.util.MethodKey;
 public class BookServiceHttp {
 
 	public static com.hehehe.servicebuilder.model.Book addBook(
-		HttpPrincipal httpPrincipal, String title, String description,
-		String thumbnail, String subtitleId, String categoryId, Integer price,
-		Integer stock, Integer pages, Integer publicYear) {
+		HttpPrincipal httpPrincipal, java.util.List<String> authorIds,
+		String title, String description, String thumbnail, String subtitleId,
+		String categoryId, Integer price, Integer stock, Integer pages,
+		Integer publicYear) {
 
 		try {
 			MethodKey methodKey = new MethodKey(
 				BookServiceUtil.class, "addBook", _addBookParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, title, description, thumbnail, subtitleId,
+				methodKey, authorIds, title, description, thumbnail, subtitleId,
 				categoryId, price, stock, pages, publicYear);
 
 			Object returnObj = null;
@@ -76,84 +77,14 @@ public class BookServiceHttp {
 		}
 	}
 
-	public static com.hehehe.servicebuilder.model.Book getBook(
+	public static com.hehehe.servicebuilder.model.Book getBookById(
 			HttpPrincipal httpPrincipal, String bookId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
 			MethodKey methodKey = new MethodKey(
-				BookServiceUtil.class, "getBook", _getBookParameterTypes1);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, bookId);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception exception) {
-				if (exception instanceof
-						com.liferay.portal.kernel.exception.PortalException) {
-
-					throw (com.liferay.portal.kernel.exception.PortalException)
-						exception;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(
-					exception);
-			}
-
-			return (com.hehehe.servicebuilder.model.Book)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException
-					systemException) {
-
-			_log.error(systemException, systemException);
-
-			throw systemException;
-		}
-	}
-
-	public static com.hehehe.servicebuilder.model.Book updateBook(
-		HttpPrincipal httpPrincipal,
-		com.hehehe.servicebuilder.model.Book book) {
-
-		try {
-			MethodKey methodKey = new MethodKey(
-				BookServiceUtil.class, "updateBook",
-				_updateBookParameterTypes2);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, book);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception exception) {
-				throw new com.liferay.portal.kernel.exception.SystemException(
-					exception);
-			}
-
-			return (com.hehehe.servicebuilder.model.Book)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException
-					systemException) {
-
-			_log.error(systemException, systemException);
-
-			throw systemException;
-		}
-	}
-
-	public static com.hehehe.servicebuilder.model.Book deleteBook(
-			HttpPrincipal httpPrincipal, String bookId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		try {
-			MethodKey methodKey = new MethodKey(
-				BookServiceUtil.class, "deleteBook",
-				_deleteBookParameterTypes3);
+				BookServiceUtil.class, "getBookById",
+				_getBookByIdParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, bookId);
 
@@ -192,7 +123,7 @@ public class BookServiceHttp {
 
 		try {
 			MethodKey methodKey = new MethodKey(
-				BookServiceUtil.class, "getBooks", _getBooksParameterTypes4);
+				BookServiceUtil.class, "getBooks", _getBooksParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, start, end, obc);
@@ -219,16 +150,15 @@ public class BookServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.hehehe.servicebuilder.model.Author>
-			getAuthors(HttpPrincipal httpPrincipal, String bookId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public static java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
+		HttpPrincipal httpPrincipal, int start, int end) {
 
 		try {
 			MethodKey methodKey = new MethodKey(
-				BookServiceUtil.class, "getAuthors",
-				_getAuthorsParameterTypes5);
+				BookServiceUtil.class, "getBooks", _getBooksParameterTypes3);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, bookId);
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, start, end);
 
 			Object returnObj = null;
 
@@ -236,18 +166,11 @@ public class BookServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception exception) {
-				if (exception instanceof
-						com.liferay.portal.kernel.exception.PortalException) {
-
-					throw (com.liferay.portal.kernel.exception.PortalException)
-						exception;
-				}
-
 				throw new com.liferay.portal.kernel.exception.SystemException(
 					exception);
 			}
 
-			return (java.util.List<com.hehehe.servicebuilder.model.Author>)
+			return (java.util.List<com.hehehe.servicebuilder.model.Book>)
 				returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException
@@ -259,13 +182,12 @@ public class BookServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.hehehe.servicebuilder.model.Book>
-		getAllBook(HttpPrincipal httpPrincipal) {
+	public static java.util.List<com.hehehe.servicebuilder.model.Book> getBooks(
+		HttpPrincipal httpPrincipal) {
 
 		try {
 			MethodKey methodKey = new MethodKey(
-				BookServiceUtil.class, "getAllBook",
-				_getAllBookParameterTypes6);
+				BookServiceUtil.class, "getBooks", _getBooksParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
@@ -291,6 +213,326 @@ public class BookServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.hehehe.servicebuilder.model.Book>
+			getBooksByAuthorId(HttpPrincipal httpPrincipal, String authorId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				BookServiceUtil.class, "getBooksByAuthorId",
+				_getBooksByAuthorIdParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, authorId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Book>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksByCategoryId(HttpPrincipal httpPrincipal, String categoryId) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				BookServiceUtil.class, "getBooksByCategoryId",
+				_getBooksByCategoryIdParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, categoryId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Book>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksByCategoryId(
+			HttpPrincipal httpPrincipal, String categoryId, int start,
+			int end) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				BookServiceUtil.class, "getBooksByCategoryId",
+				_getBooksByCategoryIdParameterTypes7);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, categoryId, start, end);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Book>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksByCategoryId(
+			HttpPrincipal httpPrincipal, String categoryId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.hehehe.servicebuilder.model.Book> obc) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				BookServiceUtil.class, "getBooksByCategoryId",
+				_getBooksByCategoryIdParameterTypes8);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, categoryId, start, end, obc);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Book>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksBySubtitleId(HttpPrincipal httpPrincipal, String subtitleId) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				BookServiceUtil.class, "getBooksBySubtitleId",
+				_getBooksBySubtitleIdParameterTypes9);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, subtitleId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Book>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksBySubtitleId(
+			HttpPrincipal httpPrincipal, String subtitleId, int start,
+			int end) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				BookServiceUtil.class, "getBooksBySubtitleId",
+				_getBooksBySubtitleIdParameterTypes10);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, subtitleId, start, end);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Book>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static java.util.List<com.hehehe.servicebuilder.model.Book>
+		getBooksBySubtitleId(
+			HttpPrincipal httpPrincipal, String subtitleId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.hehehe.servicebuilder.model.Book> obc) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				BookServiceUtil.class, "getBooksBySubtitleId",
+				_getBooksBySubtitleIdParameterTypes11);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, subtitleId, start, end, obc);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Book>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static com.hehehe.servicebuilder.model.Book updateBook(
+		HttpPrincipal httpPrincipal,
+		com.hehehe.servicebuilder.model.Book book) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				BookServiceUtil.class, "updateBook",
+				_updateBookParameterTypes12);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, book);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (com.hehehe.servicebuilder.model.Book)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	public static com.hehehe.servicebuilder.model.Book deleteBook(
+			HttpPrincipal httpPrincipal, String bookId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				BookServiceUtil.class, "deleteBook",
+				_deleteBookParameterTypes13);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, bookId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (com.hehehe.servicebuilder.model.Book)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	public static void deleteBooksByCategoryId(
 			HttpPrincipal httpPrincipal, String categoryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -298,7 +540,7 @@ public class BookServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				BookServiceUtil.class, "deleteBooksByCategoryId",
-				_deleteBooksByCategoryIdParameterTypes7);
+				_deleteBooksByCategoryIdParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, categoryId);
@@ -334,7 +576,7 @@ public class BookServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				BookServiceUtil.class, "deleteBooksBySubtitleId",
-				_deleteBooksBySubtitleIdParameterTypes8);
+				_deleteBooksBySubtitleIdParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, subtitleId);
@@ -367,7 +609,7 @@ public class BookServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				BookServiceUtil.class, "getBooksCount",
-				_getBooksCountParameterTypes9);
+				_getBooksCountParameterTypes16);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
@@ -399,7 +641,7 @@ public class BookServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				BookServiceUtil.class, "addAuthers",
-				_addAuthersParameterTypes10);
+				_addAuthersParameterTypes17);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, autherIds, bookId);
@@ -421,37 +663,89 @@ public class BookServiceHttp {
 		}
 	}
 
+	public static void changeAuthors(
+		HttpPrincipal httpPrincipal, java.util.List<String> authorIds,
+		String bookId) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				BookServiceUtil.class, "changeAuthors",
+				_changeAuthorsParameterTypes18);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, authorIds, bookId);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(BookServiceHttp.class);
 
 	private static final Class<?>[] _addBookParameterTypes0 = new Class[] {
-		String.class, String.class, String.class, String.class, String.class,
-		Integer.class, Integer.class, Integer.class, Integer.class
+		java.util.List.class, String.class, String.class, String.class,
+		String.class, String.class, Integer.class, Integer.class, Integer.class,
+		Integer.class
 	};
-	private static final Class<?>[] _getBookParameterTypes1 = new Class[] {
+	private static final Class<?>[] _getBookByIdParameterTypes1 = new Class[] {
 		String.class
 	};
-	private static final Class<?>[] _updateBookParameterTypes2 = new Class[] {
-		com.hehehe.servicebuilder.model.Book.class
-	};
-	private static final Class<?>[] _deleteBookParameterTypes3 = new Class[] {
-		String.class
-	};
-	private static final Class<?>[] _getBooksParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getBooksParameterTypes2 = new Class[] {
 		int.class, int.class,
 		com.liferay.portal.kernel.util.OrderByComparator.class
 	};
-	private static final Class<?>[] _getAuthorsParameterTypes5 = new Class[] {
+	private static final Class<?>[] _getBooksParameterTypes3 = new Class[] {
+		int.class, int.class
+	};
+	private static final Class<?>[] _getBooksParameterTypes4 = new Class[] {};
+	private static final Class<?>[] _getBooksByAuthorIdParameterTypes5 =
+		new Class[] {String.class};
+	private static final Class<?>[] _getBooksByCategoryIdParameterTypes6 =
+		new Class[] {String.class};
+	private static final Class<?>[] _getBooksByCategoryIdParameterTypes7 =
+		new Class[] {String.class, int.class, int.class};
+	private static final Class<?>[] _getBooksByCategoryIdParameterTypes8 =
+		new Class[] {
+			String.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
+	private static final Class<?>[] _getBooksBySubtitleIdParameterTypes9 =
+		new Class[] {String.class};
+	private static final Class<?>[] _getBooksBySubtitleIdParameterTypes10 =
+		new Class[] {String.class, int.class, int.class};
+	private static final Class<?>[] _getBooksBySubtitleIdParameterTypes11 =
+		new Class[] {
+			String.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
+	private static final Class<?>[] _updateBookParameterTypes12 = new Class[] {
+		com.hehehe.servicebuilder.model.Book.class
+	};
+	private static final Class<?>[] _deleteBookParameterTypes13 = new Class[] {
 		String.class
 	};
-	private static final Class<?>[] _getAllBookParameterTypes6 = new Class[] {};
-	private static final Class<?>[] _deleteBooksByCategoryIdParameterTypes7 =
+	private static final Class<?>[] _deleteBooksByCategoryIdParameterTypes14 =
 		new Class[] {String.class};
-	private static final Class<?>[] _deleteBooksBySubtitleIdParameterTypes8 =
+	private static final Class<?>[] _deleteBooksBySubtitleIdParameterTypes15 =
 		new Class[] {String.class};
-	private static final Class<?>[] _getBooksCountParameterTypes9 =
+	private static final Class<?>[] _getBooksCountParameterTypes16 =
 		new Class[] {};
-	private static final Class<?>[] _addAuthersParameterTypes10 = new Class[] {
+	private static final Class<?>[] _addAuthersParameterTypes17 = new Class[] {
 		java.util.List.class, String.class
 	};
+	private static final Class<?>[] _changeAuthorsParameterTypes18 =
+		new Class[] {java.util.List.class, String.class};
 
 }

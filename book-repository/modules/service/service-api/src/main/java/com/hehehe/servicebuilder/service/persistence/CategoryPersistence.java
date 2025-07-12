@@ -33,6 +33,48 @@ public interface CategoryPersistence extends BasePersistence<Category> {
 	 */
 
 	/**
+	 * Returns the category where name = &#63; or throws a <code>NoSuchCategoryException</code> if it could not be found.
+	 *
+	 * @param name the name
+	 * @return the matching category
+	 * @throws NoSuchCategoryException if a matching category could not be found
+	 */
+	public Category findByName(String name) throws NoSuchCategoryException;
+
+	/**
+	 * Returns the category where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param name the name
+	 * @return the matching category, or <code>null</code> if a matching category could not be found
+	 */
+	public Category fetchByName(String name);
+
+	/**
+	 * Returns the category where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param name the name
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching category, or <code>null</code> if a matching category could not be found
+	 */
+	public Category fetchByName(String name, boolean useFinderCache);
+
+	/**
+	 * Removes the category where name = &#63; from the database.
+	 *
+	 * @param name the name
+	 * @return the category that was removed
+	 */
+	public Category removeByName(String name) throws NoSuchCategoryException;
+
+	/**
+	 * Returns the number of categories where name = &#63;.
+	 *
+	 * @param name the name
+	 * @return the number of matching categories
+	 */
+	public int countByName(String name);
+
+	/**
 	 * Caches the category in the entity cache if it is enabled.
 	 *
 	 * @param category the category

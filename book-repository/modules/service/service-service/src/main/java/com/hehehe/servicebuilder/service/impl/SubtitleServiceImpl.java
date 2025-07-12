@@ -4,11 +4,10 @@
  */
 
 package com.hehehe.servicebuilder.service.impl;
-import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.model.Subtitle;
 import com.hehehe.servicebuilder.service.base.SubtitleServiceBaseImpl;
-import com.hehehe.util.comparator.SubtitleNameComparator;
 import com.liferay.portal.aop.AopService;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
@@ -22,28 +21,51 @@ import org.osgi.service.component.annotations.Component;
 @Component(property = { "json.web.service.context.name=bookservicebuilder",
 		"json.web.service.context.path=Subtitle" }, service = AopService.class)
 public class SubtitleServiceImpl extends SubtitleServiceBaseImpl {
+
+//	CREATE
+	
 	public Subtitle addSubtitle(String name) {
 		return subtitleLocalService.addSubtitle(name);
 	}
+	
+//	READ
+	
 	public Subtitle getSubtitleById(String subtitleId) throws PortalException {
 		return subtitleLocalService.getSubtitle(subtitleId);
 	}
+	
+	public List<Subtitle> getSubtitles(int start, int end, OrderByComparator<Subtitle> obc){
+		return subtitleLocalService.getSubtitles(start, end, obc);
+	}
+	
+	public List<Subtitle> getSubtitles(){
+		return subtitleLocalService.getSubtitles(QueryUtil.ALL_POS,QueryUtil.ALL_POS);
+	}
+	
+	public Subtitle getSubtitleByBookId(String bookId) throws PortalException {
+		return subtitleLocalService.getSubtitleByBookId(bookId);
+	}
+	
+//	UPDATE
+	
 	public Subtitle updateSubtitle(Subtitle subtitle) {
 		return subtitleLocalService.updateSubtitle(subtitle);
 	}
+	
+//	DELETE
+	
 	public Subtitle deleteSubtitle(String subtitleId) throws PortalException {
 		return subtitleLocalService.deleteSubtitle(subtitleId);
 	}
-	public List<Subtitle> getSubtitles(int start, int end, OrderByComparator<Subtitle> obc){
-		return subtitleLocalService.getSubtitlesSorted(start, end, obc);
-	}
-	public List<Subtitle> getAllSubtitle(){
-		return subtitleLocalService.getSubtitlesSorted(0, getSubtitlesCount(), new SubtitleNameComparator());
-	}
-	public List<Book> getBooks(int start, int end, OrderByComparator<Book> obc, String subtitleId){
-		return subtitleLocalService.getBooks(start,end,obc,subtitleId);
-	}
+	
+//	LOGIC METHOD
+
 	public int getSubtitlesCount() {
 		return subtitleLocalService.getSubtitlesCount();
 	}
+	
+	public boolean isExist(String name) {
+		return subtitleLocalService.isExist(name);
+	}
+	
 }

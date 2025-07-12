@@ -5,7 +5,6 @@
 
 package com.hehehe.servicebuilder.service;
 
-import com.hehehe.servicebuilder.model.Author;
 import com.hehehe.servicebuilder.model.Book;
 
 import com.liferay.petra.sql.dsl.query.DSLQuery;
@@ -25,6 +24,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 
 import org.osgi.annotation.versioning.ProviderType;
@@ -54,6 +54,8 @@ public interface BookLocalService
 	 */
 	public void addAuthers(List<String> autherIds, String bookId);
 
+	public void addAuthers(List<String> autherIds, String bookId, Date date);
+
 	/**
 	 * Adds the book to the database. Also notifies the appropriate model listeners.
 	 *
@@ -68,9 +70,11 @@ public interface BookLocalService
 	public Book addBook(Book book);
 
 	public Book addBook(
-		String title, String description, String thumbnail, String subtitleId,
-		String categoryId, Integer price, Integer stock, Integer pages,
-		Integer publicYear);
+		List<String> authorIds, String title, String description,
+		String thumbnail, String subtitleId, String categoryId, Integer price,
+		Integer stock, Integer pages, Integer publicYear);
+
+	public void changeAuthors(List<String> authorIds, String bookId);
 
 	/**
 	 * Creates a new book with the primary key. Does not add the book to the database.
@@ -114,10 +118,10 @@ public interface BookLocalService
 	@Indexable(type = IndexableType.DELETE)
 	public Book deleteBook(String bookId) throws PortalException;
 
-	public void deleteBooksByCategoryId(String categoryId)
+	public List<Book> deleteBooksByCategoryId(String categoryId)
 		throws PortalException;
 
-	public void deleteBooksBySubtitleId(String subtitleId)
+	public List<Book> deleteBooksBySubtitleId(String subtitleId)
 		throws PortalException;
 
 	/**
@@ -202,9 +206,6 @@ public interface BookLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Book fetchBook(String bookId);
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Author> getAuthors(String bookId) throws PortalException;
-
 	/**
 	 * Returns the book with the primary key.
 	 *
@@ -229,6 +230,35 @@ public interface BookLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Book> getBooks(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooks(int start, int end, OrderByComparator<Book> obc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksByAuthorId(String authorId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksByCategoryId(String categoryId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksByCategoryId(
+		String categoryId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksByCategoryId(
+		String categoryId, int start, int end, OrderByComparator<Book> obc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksBySubtitleId(String subtitleId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksBySubtitleId(
+		String subtitleId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Book> getBooksBySubtitleId(
+		String subtitleId, int start, int end, OrderByComparator<Book> obc);
+
 	/**
 	 * Returns the number of books.
 	 *
@@ -236,10 +266,6 @@ public interface BookLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getBooksCount();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Book> getBooksSorted(
-		int start, int end, OrderByComparator<Book> obc);
 
 	/**
 	 * Returns the OSGi service identifier.

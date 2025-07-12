@@ -40,7 +40,7 @@ public class BookUpdateActionMvcCommand extends BaseMVCActionCommand {
 		Integer pages = ParamUtil.getInteger(actionRequest, "pages");
 		Integer publicYear = ParamUtil.getInteger(actionRequest, "publicYear");
 		try {
-			Book book = this.bookService.getBook(bookId);
+			Book book = this.bookService.getBookById(bookId);
 			book.setTitle(title);
 			book.setDescription(description);
 			book.setThumbnail(thumbnail);

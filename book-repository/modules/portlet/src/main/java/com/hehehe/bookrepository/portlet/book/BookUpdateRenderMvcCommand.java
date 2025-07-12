@@ -35,10 +35,10 @@ public class BookUpdateRenderMvcCommand implements MVCRenderCommand {
 		// TODO Auto-generated method stub
 		String bookId = ParamUtil.getString(renderRequest, "bookId");
 		try {
-			renderRequest.setAttribute("book", bookService.getBook(bookId));
-			renderRequest.setAttribute("allAuthor", this.authorService.getAllAuthor());
-			renderRequest.setAttribute("allCategory", this.categoryService.getAllCategory());
-			renderRequest.setAttribute("allSubtitle", this.subtitleService.getAllSubtitle());
+			renderRequest.setAttribute("book", bookService.getBookById(bookId));
+			renderRequest.setAttribute("allAuthor", this.authorService.getAuthors());
+			renderRequest.setAttribute("allCategory", this.categoryService.getCategories());
+			renderRequest.setAttribute("allSubtitle", this.subtitleService.getSubtitles());
 		} catch (PortalException e) {
 			SessionErrors.add(renderRequest, "invalid-book");
 		}

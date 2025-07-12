@@ -6,10 +6,9 @@
 package com.hehehe.servicebuilder.service.impl;
 
 import com.hehehe.servicebuilder.model.Author;
-import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.service.base.AuthorServiceBaseImpl;
-import com.hehehe.util.comparator.AuthorNameComparator;
 import com.liferay.portal.aop.AopService;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
@@ -23,32 +22,50 @@ import org.osgi.service.component.annotations.Component;
 @Component(property = { "json.web.service.context.name=bookservicebuilder",
 		"json.web.service.context.path=Author" }, service = AopService.class)
 public class AuthorServiceImpl extends AuthorServiceBaseImpl {
+//	CREATE
+	
 	public Author addAuthor(String name) {
 		return authorLocalService.addAuthor(name);
 	}
-
+	
+//	READ
+	
 	public Author getAuthorById(String authorId) throws PortalException {
 		return authorLocalService.getAuthor(authorId);
 	}
 
+	public List<Author> getAuthors(int start, int end, OrderByComparator<Author> obc) {
+		return authorLocalService.getAuthors(start, end, obc);
+	}
+	
+	public List<Author> getAuthors(int start, int end) {
+		return authorLocalService.getAuthors(start, end);
+	}
+	
+	public List<Author> getAuthors(){
+		return authorLocalService.getAuthors(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+	
+	public List<Author> getAuthorsByBookId(String bookId) throws PortalException {
+		return authorLocalService.getAuthorsByBookId(bookId);
+	}
+	
+//	UPDATE
+	
 	public Author updateAuthor(Author author) {
 		return authorLocalService.updateAuthor(author);
 	}
-
+	
+//	DELETE
+	
 	public Author deleteAuthor(String authorId) throws PortalException {
 		return authorLocalService.deleteAuthor(authorId);
 	}
-
-	public List<Author> getAuthors(int start, int end, OrderByComparator<Author> obc) {
-		return authorLocalService.getAuthorsSorted(start, end, obc);
-	}
 	
-	public List<Author> getAllAuthor(){
-		return authorLocalService.getAuthorsSorted(0, getAuthorCount(), new AuthorNameComparator());
-	}
-
-	public List<Book> getBooks(String authorId) throws PortalException {
-		return authorLocalService.getBooks(authorId);
+//	LOGIC METHOD
+	
+	public boolean isExist(String name) {
+		return authorLocalService.isExist(name);
 	}
 
 	public int getAuthorCount() {

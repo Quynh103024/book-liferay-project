@@ -112,6 +112,62 @@ public class SubtitleUtil {
 	}
 
 	/**
+	 * Returns the subtitle where name = &#63; or throws a <code>NoSuchSubtitleException</code> if it could not be found.
+	 *
+	 * @param name the name
+	 * @return the matching subtitle
+	 * @throws NoSuchSubtitleException if a matching subtitle could not be found
+	 */
+	public static Subtitle findByName(String name)
+		throws com.hehehe.servicebuilder.exception.NoSuchSubtitleException {
+
+		return getPersistence().findByName(name);
+	}
+
+	/**
+	 * Returns the subtitle where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param name the name
+	 * @return the matching subtitle, or <code>null</code> if a matching subtitle could not be found
+	 */
+	public static Subtitle fetchByName(String name) {
+		return getPersistence().fetchByName(name);
+	}
+
+	/**
+	 * Returns the subtitle where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param name the name
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching subtitle, or <code>null</code> if a matching subtitle could not be found
+	 */
+	public static Subtitle fetchByName(String name, boolean useFinderCache) {
+		return getPersistence().fetchByName(name, useFinderCache);
+	}
+
+	/**
+	 * Removes the subtitle where name = &#63; from the database.
+	 *
+	 * @param name the name
+	 * @return the subtitle that was removed
+	 */
+	public static Subtitle removeByName(String name)
+		throws com.hehehe.servicebuilder.exception.NoSuchSubtitleException {
+
+		return getPersistence().removeByName(name);
+	}
+
+	/**
+	 * Returns the number of subtitles where name = &#63;.
+	 *
+	 * @param name the name
+	 * @return the number of matching subtitles
+	 */
+	public static int countByName(String name) {
+		return getPersistence().countByName(name);
+	}
+
+	/**
 	 * Caches the subtitle in the entity cache if it is enabled.
 	 *
 	 * @param subtitle the subtitle

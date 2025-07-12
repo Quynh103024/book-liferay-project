@@ -109,6 +109,10 @@ public interface BookAuthorLocalService
 	public BookAuthor deleteBookAuthor(BookAuthorPK bookAuthorPK)
 		throws PortalException;
 
+	public void deleteBookAuthorByAuthorId(String authorId);
+
+	public void deleteBookAuthorByBookId(String bookId);
+
 	/**
 	 * @throws PortalException
 	 */
@@ -201,6 +205,12 @@ public interface BookAuthorLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BookAuthor getBookAuthor(BookAuthorPK bookAuthorPK)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<BookAuthor> getBookAuthorByAuthorId(String authorId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<BookAuthor> getBookAuthorByBookId(String bookId);
 
 	/**
 	 * Returns a range of all the book authors.

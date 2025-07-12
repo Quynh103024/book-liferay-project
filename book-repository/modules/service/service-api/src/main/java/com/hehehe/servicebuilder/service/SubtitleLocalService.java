@@ -5,7 +5,6 @@
 
 package com.hehehe.servicebuilder.service;
 
-import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.model.Subtitle;
 
 import com.liferay.petra.sql.dsl.query.DSLQuery;
@@ -191,13 +190,6 @@ public interface SubtitleLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Subtitle fetchSubtitle(String subtitleId);
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Book> getAllBook(String subtitleId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Book> getBooks(
-		int start, int end, OrderByComparator<Book> obc, String subtitleId);
-
 	/**
 	 * Returns the OSGi service identifier.
 	 *
@@ -223,6 +215,9 @@ public interface SubtitleLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Subtitle getSubtitle(String subtitleId) throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Subtitle getSubtitleByBookId(String bookId) throws PortalException;
+
 	/**
 	 * Returns a range of all the subtitles.
 	 *
@@ -237,6 +232,10 @@ public interface SubtitleLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Subtitle> getSubtitles(int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Subtitle> getSubtitles(
+		int start, int end, OrderByComparator<Subtitle> obc);
+
 	/**
 	 * Returns the number of subtitles.
 	 *
@@ -246,8 +245,7 @@ public interface SubtitleLocalService
 	public int getSubtitlesCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Subtitle> getSubtitlesSorted(
-		int start, int end, OrderByComparator<Subtitle> obc);
+	public boolean isExist(String name);
 
 	/**
 	 * Updates the subtitle in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

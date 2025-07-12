@@ -16,6 +16,8 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -131,6 +133,15 @@ public class AuthorPersistenceTest {
 		Assert.assertEquals(
 			Time.getShortTimestamp(existingAuthor.getModifiedDate()),
 			Time.getShortTimestamp(newAuthor.getModifiedDate()));
+	}
+
+	@Test
+	public void testCountByName() throws Exception {
+		_persistence.countByName("");
+
+		_persistence.countByName("null");
+
+		_persistence.countByName((String)null);
 	}
 
 	@Test
@@ -337,6 +348,62 @@ public class AuthorPersistenceTest {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(0, result.size());
+	}
+
+	@Test
+	public void testResetOriginalValues() throws Exception {
+		Author newAuthor = addAuthor();
+
+		_persistence.clearCache();
+
+		_assertOriginalValues(
+			_persistence.findByPrimaryKey(newAuthor.getPrimaryKey()));
+	}
+
+	@Test
+	public void testResetOriginalValuesWithDynamicQueryLoadFromDatabase()
+		throws Exception {
+
+		_testResetOriginalValuesWithDynamicQuery(true);
+	}
+
+	@Test
+	public void testResetOriginalValuesWithDynamicQueryLoadFromSession()
+		throws Exception {
+
+		_testResetOriginalValuesWithDynamicQuery(false);
+	}
+
+	private void _testResetOriginalValuesWithDynamicQuery(boolean clearSession)
+		throws Exception {
+
+		Author newAuthor = addAuthor();
+
+		if (clearSession) {
+			Session session = _persistence.openSession();
+
+			session.flush();
+
+			session.clear();
+		}
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			Author.class, _dynamicQueryClassLoader);
+
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq("authorId", newAuthor.getAuthorId()));
+
+		List<Author> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		_assertOriginalValues(result.get(0));
+	}
+
+	private void _assertOriginalValues(Author author) {
+		Assert.assertEquals(
+			author.getName(),
+			ReflectionTestUtil.invoke(
+				author, "getColumnOriginalValue", new Class<?>[] {String.class},
+				"name"));
 	}
 
 	protected Author addAuthor() throws Exception {

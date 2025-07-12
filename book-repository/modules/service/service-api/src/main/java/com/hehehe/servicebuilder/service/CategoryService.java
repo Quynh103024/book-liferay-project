@@ -5,7 +5,6 @@
 
 package com.hehehe.servicebuilder.service;
 
-import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.model.Category;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -50,11 +49,7 @@ public interface CategoryService extends BaseService {
 	public Category deleteCategory(String categoryId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Category> getAllCategory();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Book> getBooks(
-		int start, int end, OrderByComparator<Book> obc, String categoryId);
+	public List<Category> getCategories();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Category> getCategories(
@@ -62,6 +57,9 @@ public interface CategoryService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCategoriesCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Category getCategoryByBookId(String bookId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Category getCategoryById(String categoryId) throws PortalException;
@@ -72,6 +70,9 @@ public interface CategoryService extends BaseService {
 	 * @return the OSGi service identifier
 	 */
 	public String getOSGiServiceIdentifier();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isExist(String name);
 
 	public Category updateCategory(Category category);
 

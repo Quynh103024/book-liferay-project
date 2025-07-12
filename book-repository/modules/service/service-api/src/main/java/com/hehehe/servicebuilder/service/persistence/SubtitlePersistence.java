@@ -33,6 +33,48 @@ public interface SubtitlePersistence extends BasePersistence<Subtitle> {
 	 */
 
 	/**
+	 * Returns the subtitle where name = &#63; or throws a <code>NoSuchSubtitleException</code> if it could not be found.
+	 *
+	 * @param name the name
+	 * @return the matching subtitle
+	 * @throws NoSuchSubtitleException if a matching subtitle could not be found
+	 */
+	public Subtitle findByName(String name) throws NoSuchSubtitleException;
+
+	/**
+	 * Returns the subtitle where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param name the name
+	 * @return the matching subtitle, or <code>null</code> if a matching subtitle could not be found
+	 */
+	public Subtitle fetchByName(String name);
+
+	/**
+	 * Returns the subtitle where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param name the name
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching subtitle, or <code>null</code> if a matching subtitle could not be found
+	 */
+	public Subtitle fetchByName(String name, boolean useFinderCache);
+
+	/**
+	 * Removes the subtitle where name = &#63; from the database.
+	 *
+	 * @param name the name
+	 * @return the subtitle that was removed
+	 */
+	public Subtitle removeByName(String name) throws NoSuchSubtitleException;
+
+	/**
+	 * Returns the number of subtitles where name = &#63;.
+	 *
+	 * @param name the name
+	 * @return the number of matching subtitles
+	 */
+	public int countByName(String name);
+
+	/**
 	 * Caches the subtitle in the entity cache if it is enabled.
 	 *
 	 * @param subtitle the subtitle

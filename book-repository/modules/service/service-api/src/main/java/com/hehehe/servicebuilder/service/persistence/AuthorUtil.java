@@ -108,6 +108,62 @@ public class AuthorUtil {
 	}
 
 	/**
+	 * Returns the author where name = &#63; or throws a <code>NoSuchAuthorException</code> if it could not be found.
+	 *
+	 * @param name the name
+	 * @return the matching author
+	 * @throws NoSuchAuthorException if a matching author could not be found
+	 */
+	public static Author findByName(String name)
+		throws com.hehehe.servicebuilder.exception.NoSuchAuthorException {
+
+		return getPersistence().findByName(name);
+	}
+
+	/**
+	 * Returns the author where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param name the name
+	 * @return the matching author, or <code>null</code> if a matching author could not be found
+	 */
+	public static Author fetchByName(String name) {
+		return getPersistence().fetchByName(name);
+	}
+
+	/**
+	 * Returns the author where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param name the name
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching author, or <code>null</code> if a matching author could not be found
+	 */
+	public static Author fetchByName(String name, boolean useFinderCache) {
+		return getPersistence().fetchByName(name, useFinderCache);
+	}
+
+	/**
+	 * Removes the author where name = &#63; from the database.
+	 *
+	 * @param name the name
+	 * @return the author that was removed
+	 */
+	public static Author removeByName(String name)
+		throws com.hehehe.servicebuilder.exception.NoSuchAuthorException {
+
+		return getPersistence().removeByName(name);
+	}
+
+	/**
+	 * Returns the number of authors where name = &#63;.
+	 *
+	 * @param name the name
+	 * @return the number of matching authors
+	 */
+	public static int countByName(String name) {
+		return getPersistence().countByName(name);
+	}
+
+	/**
 	 * Caches the author in the entity cache if it is enabled.
 	 *
 	 * @param author the author
