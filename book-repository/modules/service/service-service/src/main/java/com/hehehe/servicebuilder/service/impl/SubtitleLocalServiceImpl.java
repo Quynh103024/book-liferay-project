@@ -61,6 +61,6 @@ public class SubtitleLocalServiceImpl extends SubtitleLocalServiceBaseImpl {
 	@Override
 	public Subtitle deleteSubtitle(String subtitleId) throws PortalException {
 		bookLocalService.deleteBooksBySubtitleId(subtitleId);
-		return subtitleLocalService.deleteSubtitle(subtitleId);
+		return subtitlePersistence.remove(subtitleId);
 	}
 }

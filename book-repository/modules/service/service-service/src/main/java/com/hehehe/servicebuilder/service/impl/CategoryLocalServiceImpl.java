@@ -55,7 +55,7 @@ public class CategoryLocalServiceImpl extends CategoryLocalServiceBaseImpl {
 	@Override
 	public Category deleteCategory(String categoryId) throws PortalException {
 		bookLocalService.deleteBooksByCategoryId(categoryId);
-		return categoryLocalService.deleteCategory(categoryId);
+		return categoryPersistence.remove(categoryId);
 	}
 	@Override
 	public Category updateCategory(Category category) {
