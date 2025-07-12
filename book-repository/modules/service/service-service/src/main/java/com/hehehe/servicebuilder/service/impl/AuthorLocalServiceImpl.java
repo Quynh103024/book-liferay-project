@@ -51,7 +51,7 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 	}
 	@Override
 	public Author deleteAuthor(String authorId) throws PortalException {
-		bookAuthorPersistence.removeByBookId(authorId);
+		bookAuthorPersistence.removeByAuthorId(authorId);
 		return authorPersistence.remove(authorId);
 	}
 	@Override
