@@ -7,7 +7,9 @@
 <portlet:renderURL var="AuthorCreateURL">
 	<portlet:param name="mvcRenderCommandName" value="author/create/view" />
 </portlet:renderURL>
+
 <aui:a cssClass="btn btn-success" href="${AuthorCreateURL}">Add Author</aui:a>
+
 <liferay-ui:search-container delta="10"
 	emptyResultsMessage="no-entries-were-found" total="${totalAuthor}">
 	<liferay-ui:search-container-results results="${entries}" />
@@ -16,28 +18,27 @@
 		keyProperty="authorId" modelVar="entry" escapedModel="<%=true%>">
 		<liferay-ui:search-container-column-text property="name" />
 		<liferay-ui:search-container-column-text name="Actions">
+
+			<portlet:renderURL var="AuthorDetailURL">
+				<portlet:param name="mvcRenderCommandName"
+					value="author/detail/view" />
+				<portlet:param name="authorId" value="${entry.authorId}" />
+			</portlet:renderURL>
+			<aui:a cssClass="btn btn-primary" href="${AuthorDetailURL}">Details</aui:a>
+
 			<portlet:renderURL var="AuthorUpdateURL">
 				<portlet:param name="mvcRenderCommandName"
 					value="author/update/view" />
 				<portlet:param name="authorId" value="${entry.authorId}" />
 			</portlet:renderURL>
-			<aui:a cssClass="btn btn-info" href="${AuthorUpdateURL}">Update jsdjb</aui:a>
+			<aui:a cssClass="btn btn-info" href="${AuthorUpdateURL}">Update</aui:a>
+
 
 			<portlet:actionURL name="author/delete/save" var="AuthorDeleteURL">
 				<portlet:param name="authorId" value="${entry.authorId}" />
 			</portlet:actionURL>
 			<aui:a cssClass="btn btn-danger" href="${AuthorDeleteURL}"
-				onclick="return confirm(â€™Are you sure you want to delete this author?\n (This will also delete all shoes associated with the author)â€™);">Delete</aui:a>
-
-
-
-			<portlet:renderURL var="AuthorBooksURL">
-				<portlet:param name="mvcRenderCommandName" value="author/view/books" />
-				<portlet:param name="authorId" value="${entry.authorId}" />
-			</portlet:renderURL>
-			<aui:a cssClass="btn btn-secondary" href="${AuthorBooksURL}">View Books</aui:a>
-
-
+				onclick="return confirm(€™Are you sure you want to delete this author?\n (This will also delete all books associated with the author)â€™);">Delete</aui:a>
 
 
 		</liferay-ui:search-container-column-text>

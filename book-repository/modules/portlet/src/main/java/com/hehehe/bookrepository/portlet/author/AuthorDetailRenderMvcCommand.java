@@ -1,11 +1,11 @@
 package com.hehehe.bookrepository.portlet.author;
 
 import com.hehehe.bookrepository.portlet.constants.BookPortletKeys;
-import com.hehehe.servicebuilder.model.Book;
+import com.hehehe.servicebuilder.model.Author;
 import com.hehehe.servicebuilder.service.AuthorService;
 import com.hehehe.servicebuilder.service.BookService;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 import java.util.List;
@@ -20,28 +20,28 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	    immediate = true,
 	    property = {
-	        "javax.portlet.name=" + BookPortletKeys.AUTHORPORTLET,	        
-	        "mvc.command.name=author/books/view"
+	        "javax.portlet.name=" + BookPortletKeys.AUTHORPORTLET,
+	        "mvc.command.name=author/detail/view"
 	    },
 	    service = MVCRenderCommand.class
 	)
-	public class AuthorViewBooksRenderMvcCommand implements MVCRenderCommand {
+	public class AuthorDetailRenderMvcCommand implements MVCRenderCommand {
+
 	    @Reference
-	    private BookService bookService;
+	    private AuthorService authorService;
 
 	    @Override
 	    public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
-	        String authorId = ParamUtil.getString(renderRequest, "authorId").trim();
+	        String authorId = ParamUtil.getString(renderRequest, "authorId");
+	        
+	        try {
+	        	Author author = authorService.getAuthorById(authorId);
+	            renderRequest.setAttribute("author", author);
+	        } catch (Exception e) {
+	            SessionErrors.add(renderRequest, "author-not-found");
+	        }
 
-	        List<Book> books = null;
-			try {
-				books = bookService.getBooksByAuthorId(authorId);
-			} catch (PortalException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        renderRequest.setAttribute("books", books);
-	        return "/author/view_books.jsp";
+	        return "/author/details.jsp";
 	    }
 	}
 

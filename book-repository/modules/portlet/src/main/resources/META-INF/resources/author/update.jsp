@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="com.liferay.portal.kernel.servlet.SessionErrors" %>
 
-
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui"%>
 <%@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet"%>
@@ -31,11 +30,14 @@
         <aui:input name="name" value="${author.getName()}" label="Author Name">
             <aui:validator name="required" />
         </aui:input>
+        
         <aui:button-row>
+        	<aui:button type="button" value="Back" onclick="history.back();" />
             <aui:button type="submit" value="Update Author" />
         </aui:button-row>
     </aui:form>
 </c:if>
+
 
 <c:if test="<%= author == null %>">
     <p>No author found to update.</p>

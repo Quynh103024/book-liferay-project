@@ -22,6 +22,8 @@
 	<aui:input name="name" label="Author Name" />
 
 	<aui:button-row>
-		<aui:button type="submit" value="Add Author" />
+		<aui:button type="button" value="Back" onclick="history.back();" />
+		<aui:button type="submit" value="Add Author" />		
 	</aui:button-row>
 </aui:form>
+
