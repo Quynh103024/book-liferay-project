@@ -12,7 +12,9 @@ import com.hehehe.servicebuilder.model.impl.BookAuthorImpl;
 import com.hehehe.servicebuilder.model.impl.BookImpl;
 import com.hehehe.servicebuilder.service.BookAuthorLocalService;
 import com.hehehe.servicebuilder.service.base.BookLocalServiceBaseImpl;
-
+import com.hehehe.servicebuilder.service.persistence.BookAuthorPK;
+import com.hehehe.servicebuilder.service.persistence.BookAuthorPersistence;
+import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -23,6 +25,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Brian Wing Shun Chan
@@ -90,6 +93,7 @@ public class BookLocalServiceImpl extends BookLocalServiceBaseImpl {
 		}
 		return bookPersistence.update(book);
 	}
+
 	public void addAuthers(List<String> autherIds, String bookId) {
 		BookAuthorLocalService bas = new BookAuthorLocalServiceImpl();
 		Date now = new Date();

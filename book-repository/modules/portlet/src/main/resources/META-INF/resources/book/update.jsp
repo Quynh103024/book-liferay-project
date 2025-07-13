@@ -13,6 +13,7 @@ int startYear = 105;
 <portlet:actionURL name="book/update/save" var="BookUpdateURL" />
 <h1>Book details:</h1>
 <aui:form name="fm" action="${BookUpdateURL}">
+	<aui:model-context bean="${book}" model="<%= Book.class %>" />
 	<aui:input name="bookId" type="hidden" value="${book.getBookId()}"></aui:input>
 	<aui:input name="title">
 		<aui:validator name="required"></aui:validator>
