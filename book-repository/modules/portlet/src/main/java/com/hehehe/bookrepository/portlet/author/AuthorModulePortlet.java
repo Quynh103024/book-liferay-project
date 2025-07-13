@@ -3,8 +3,11 @@ package com.hehehe.bookrepository.portlet.author;
 import com.hehehe.bookrepository.portlet.constants.BookPortletKeys;
 import com.hehehe.servicebuilder.service.AuthorService;
 import com.hehehe.util.comparator.AuthorNameComparator;
+import com.hehehe.util.comparator.BookTitleComparator;
+
 import javax.portlet.Portlet;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 
 import java.io.IOException;
@@ -36,8 +39,19 @@ public class AuthorModulePortlet extends MVCPortlet {
 		int cur = ParamUtil.getInteger(renderRequest, "cur");
 		int from = delta * (cur - 1);
 		int to = delta == 0 ? 9 : delta * cur;
+		
+		String orderByType = ParamUtil.getString(renderRequest, "orderByType","asc");
+		String orderByCol = ParamUtil.getString(renderRequest, "orderByCol");
+		boolean ascending = orderByType.equals("asc");
+		OrderByComparator comparator = null;
+		if(ascending) {
+			if(orderByCol.equals("name"))
+				comparator = new AuthorNameComparator();
+			
+		}
+		
 		renderRequest.setAttribute("totalAuthor", authorService.getAuthorCount());
-		renderRequest.setAttribute("entries", authorService.getAuthors(from, to, new AuthorNameComparator()));
+		renderRequest.setAttribute("entries", authorService.getAuthors(from, to, comparator));
 		super.doView(renderRequest, renderResponse);
 	}
 }

@@ -78,6 +78,14 @@ public class AuthorServiceWrapper
 		return _authorService.getAuthorsByBookId(bookId);
 	}
 
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Author>
+			getAuthorsColaborate(String authorId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _authorService.getAuthorsColaborate(authorId);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

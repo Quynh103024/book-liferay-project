@@ -50,6 +50,10 @@ public class AuthorServiceImpl extends AuthorServiceBaseImpl {
 		return authorLocalService.getAuthorsByBookId(bookId);
 	}
 	
+	public List<Author> getAuthorsColaborate(String authorId) throws PortalException{
+		return authorLocalService.getAuthorsColaborate(authorId);
+	}
+	
 //	UPDATE
 	
 	public Author updateAuthor(Author author) {

@@ -6,6 +6,7 @@
 package com.hehehe.servicebuilder.service.impl;
 
 import com.hehehe.servicebuilder.model.Author;
+import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.model.BookAuthor;
 import com.hehehe.servicebuilder.model.impl.AuthorImpl;
 import com.hehehe.servicebuilder.service.BookAuthorLocalService;
@@ -18,7 +19,9 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.osgi.service.component.annotations.Component;
@@ -54,6 +57,7 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 	public List<Author> getAuthors(int start, int end, OrderByComparator<Author> obc){
 		return authorPersistence.findAll(start,end,obc);
 	}
+	
 	public List<Author> getAuthorsByBookId(String bookId) throws PortalException {
 		List<BookAuthor> bas = bookAuthorLocalService.getBookAuthorByBookId(bookId);
 		List<Author> authors = new ArrayList<>();
@@ -62,6 +66,18 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 			authors.add(author);
 		}
 		return authors;
+	}
+	
+	public List<Author> getAuthorsColaborate(String authorId) throws PortalException{
+		List<Book> books = bookLocalService.getBooksByAuthorId(authorId);
+		Set<Author> authors = new HashSet<>();
+		for(Book book : books) {
+			List<Author> list = authorLocalService.getAuthorsByBookId(book.getBookId());
+			for(Author au : list) {
+				authors.add(au);
+			}
+		}
+		return new ArrayList<>(authors);
 	}
 	
 //	UPDATE

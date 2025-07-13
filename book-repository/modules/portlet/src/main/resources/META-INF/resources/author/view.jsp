@@ -11,24 +11,26 @@
 <aui:a cssClass="btn btn-success" href="${AuthorCreateURL}">Add Author</aui:a>
 
 <liferay-ui:search-container delta="10"
-	emptyResultsMessage="no-entries-were-found" total="${totalAuthor}">
+	emptyResultsMessage="no-entries-were-found" total="${totalAuthor}" 
+	orderByCol="${orderByCol}"	
+	orderByType="${orderByType}">
+	
+	
 	<liferay-ui:search-container-results results="${entries}" />
 	<liferay-ui:search-container-row
 		className="com.hehehe.servicebuilder.model.Author"
 		keyProperty="authorId" modelVar="entry" escapedModel="<%=true%>">
-		<liferay-ui:search-container-column-text property="name" />
+		<liferay-ui:search-container-column-text property="name" orderable="true"/>
 		<liferay-ui:search-container-column-text name="Actions">
 
 			<portlet:renderURL var="AuthorDetailURL">
-				<portlet:param name="mvcRenderCommandName"
-					value="author/detail/view" />
+				<portlet:param name="mvcRenderCommandName" value="author/detail/view" />
 				<portlet:param name="authorId" value="${entry.authorId}" />
 			</portlet:renderURL>
 			<aui:a cssClass="btn btn-primary" href="${AuthorDetailURL}">Details</aui:a>
 
 			<portlet:renderURL var="AuthorUpdateURL">
-				<portlet:param name="mvcRenderCommandName"
-					value="author/update/view" />
+				<portlet:param name="mvcRenderCommandName" value="author/update/view" />
 				<portlet:param name="authorId" value="${entry.authorId}" />
 			</portlet:renderURL>
 			<aui:a cssClass="btn btn-info" href="${AuthorUpdateURL}">Update</aui:a>

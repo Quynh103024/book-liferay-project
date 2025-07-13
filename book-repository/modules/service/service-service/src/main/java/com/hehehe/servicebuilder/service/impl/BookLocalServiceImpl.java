@@ -9,7 +9,6 @@ import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.model.BookAuthor;
 import com.hehehe.servicebuilder.model.impl.BookAuthorImpl;
 import com.hehehe.servicebuilder.model.impl.BookImpl;
-import com.hehehe.servicebuilder.service.AuthorLocalService;
 import com.hehehe.servicebuilder.service.BookAuthorLocalService;
 import com.hehehe.servicebuilder.service.base.BookLocalServiceBaseImpl;
 

@@ -254,6 +254,47 @@ public class AuthorServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.hehehe.servicebuilder.model.Author>
+			getAuthorsColaborate(HttpPrincipal httpPrincipal, String authorId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				AuthorServiceUtil.class, "getAuthorsColaborate",
+				_getAuthorsColaborateParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, authorId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.hehehe.servicebuilder.model.Author>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	public static com.hehehe.servicebuilder.model.Author updateAuthor(
 		HttpPrincipal httpPrincipal,
 		com.hehehe.servicebuilder.model.Author author) {
@@ -261,7 +302,7 @@ public class AuthorServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				AuthorServiceUtil.class, "updateAuthor",
-				_updateAuthorParameterTypes6);
+				_updateAuthorParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, author);
 
@@ -293,7 +334,7 @@ public class AuthorServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				AuthorServiceUtil.class, "deleteAuthor",
-				_deleteAuthorParameterTypes7);
+				_deleteAuthorParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, authorId);
@@ -329,7 +370,7 @@ public class AuthorServiceHttp {
 	public static boolean isExist(HttpPrincipal httpPrincipal, String name) {
 		try {
 			MethodKey methodKey = new MethodKey(
-				AuthorServiceUtil.class, "isExist", _isExistParameterTypes8);
+				AuthorServiceUtil.class, "isExist", _isExistParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name);
 
@@ -358,7 +399,7 @@ public class AuthorServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				AuthorServiceUtil.class, "getAuthorCount",
-				_getAuthorCountParameterTypes9);
+				_getAuthorCountParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
@@ -400,16 +441,18 @@ public class AuthorServiceHttp {
 	private static final Class<?>[] _getAuthorsParameterTypes4 = new Class[] {};
 	private static final Class<?>[] _getAuthorsByBookIdParameterTypes5 =
 		new Class[] {String.class};
-	private static final Class<?>[] _updateAuthorParameterTypes6 = new Class[] {
+	private static final Class<?>[] _getAuthorsColaborateParameterTypes6 =
+		new Class[] {String.class};
+	private static final Class<?>[] _updateAuthorParameterTypes7 = new Class[] {
 		com.hehehe.servicebuilder.model.Author.class
 	};
-	private static final Class<?>[] _deleteAuthorParameterTypes7 = new Class[] {
+	private static final Class<?>[] _deleteAuthorParameterTypes8 = new Class[] {
 		String.class
 	};
-	private static final Class<?>[] _isExistParameterTypes8 = new Class[] {
+	private static final Class<?>[] _isExistParameterTypes9 = new Class[] {
 		String.class
 	};
-	private static final Class<?>[] _getAuthorCountParameterTypes9 =
+	private static final Class<?>[] _getAuthorCountParameterTypes10 =
 		new Class[] {};
 
 }

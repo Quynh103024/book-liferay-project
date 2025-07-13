@@ -1,9 +1,11 @@
-package com.hehehe.bookrepository.portlet.author;
+package com.hehehe.bookrepository.portlet.category;
 
 import com.hehehe.bookrepository.portlet.constants.BookPortletKeys;
 import com.hehehe.servicebuilder.model.Author;
+import com.hehehe.servicebuilder.model.Category;
 import com.hehehe.servicebuilder.service.AuthorService;
 import com.hehehe.servicebuilder.service.BookService;
+import com.hehehe.servicebuilder.service.CategoryService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -21,29 +23,25 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	    immediate = true,
 	    property = {
-	        "javax.portlet.name=" + BookPortletKeys.AUTHORPORTLET,
-	        "mvc.command.name=author/detail/view"
+	        "javax.portlet.name=" + BookPortletKeys.CATEGORYPORTLET,
+	        "mvc.command.name=category/detail/view"
 	    },
 	    service = MVCRenderCommand.class
 	)
-	public class AuthorDetailRenderMvcCommand implements MVCRenderCommand {
+	public class CategoryDetailRenderMvcCommand implements MVCRenderCommand {
 
 	    @Reference
-	    private AuthorService authorService;
+	    private CategoryService categoryService;
 
 	    @Override
 	    public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
-	        String authorId = ParamUtil.getString(renderRequest, "authorId");
-        	List<Author> authorsCollab = new ArrayList<>();
+	        String categoryId = ParamUtil.getString(renderRequest, "categoryId");
 	        try {
-	        	Author author = authorService.getAuthorById(authorId);
-	        	authorsCollab = authorService.getAuthorsColaborate(authorId);
-	            renderRequest.setAttribute("author", author);
-	            renderRequest.setAttribute("authors", authorsCollab);
+	        	Category category = categoryService.getCategoryById(categoryId);
+	            renderRequest.setAttribute("category", category);
 	        } catch (Exception e) {
-	            SessionErrors.add(renderRequest, "author-not-found");
+	            SessionErrors.add(renderRequest, "category-not-found");
 	        }
-	        return "/author/details.jsp";
+	        return "/category/details.jsp";
 	    }
 	}
-

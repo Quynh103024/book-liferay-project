@@ -8,6 +8,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.util.ParamUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.PortletException;
@@ -28,12 +29,12 @@ import org.osgi.service.component.annotations.Reference;
 	public class AuthorViewBooksRenderMvcCommand implements MVCRenderCommand {
 	    @Reference
 	    private BookService bookService;
-
+	    
 	    @Override
 	    public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
 	        String authorId = ParamUtil.getString(renderRequest, "authorId").trim();
-
-	        List<Book> books = null;
+	        List<Book> books = new ArrayList<>();
+	        
 			try {
 				books = bookService.getBooksByAuthorId(authorId);
 			} catch (PortalException e) {
@@ -41,6 +42,7 @@ import org.osgi.service.component.annotations.Reference;
 				e.printStackTrace();
 			}
 	        renderRequest.setAttribute("books", books);
+	        
 	        return "/author/view_books.jsp";
 	    }
 	}

@@ -163,6 +163,15 @@ public class BookPersistenceTest {
 	}
 
 	@Test
+	public void testCountByTitle() throws Exception {
+		_persistence.countByTitle("");
+
+		_persistence.countByTitle("null");
+
+		_persistence.countByTitle((String)null);
+	}
+
+	@Test
 	public void testCountBySubtitleId() throws Exception {
 		_persistence.countBySubtitleId("");
 

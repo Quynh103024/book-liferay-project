@@ -68,6 +68,12 @@ public class AuthorServiceUtil {
 		return getService().getAuthorsByBookId(bookId);
 	}
 
+	public static List<Author> getAuthorsColaborate(String authorId)
+		throws PortalException {
+
+		return getService().getAuthorsColaborate(authorId);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *
