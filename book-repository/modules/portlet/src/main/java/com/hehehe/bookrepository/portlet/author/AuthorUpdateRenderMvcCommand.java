@@ -24,7 +24,7 @@ public class AuthorUpdateRenderMvcCommand implements MVCRenderCommand {
 	@Override
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
 		// TODO Auto-generated method stub
-		String authorId = ParamUtil.getString(renderRequest, "authorId");
+		String authorId = ParamUtil.getString(renderRequest, "authorId").trim();
 		try {
 			renderRequest.setAttribute("author", authorService.getAuthorById(authorId));
 		} catch (PortalException e) {

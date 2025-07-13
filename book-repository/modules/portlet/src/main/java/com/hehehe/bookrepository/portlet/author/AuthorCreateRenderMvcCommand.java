@@ -14,11 +14,9 @@ import org.osgi.service.component.annotations.Component;
 				"mvc.command.name=author/create/view"
 		})
 public class AuthorCreateRenderMvcCommand implements MVCRenderCommand {
-
 	@Override
 	public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
 		// TODO Auto-generated method stub
 		return "/author/create.jsp";
 	}
-	
 }

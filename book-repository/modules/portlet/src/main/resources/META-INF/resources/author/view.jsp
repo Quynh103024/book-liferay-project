@@ -17,15 +17,29 @@
 		<liferay-ui:search-container-column-text property="name" />
 		<liferay-ui:search-container-column-text name="Actions">
 			<portlet:renderURL var="AuthorUpdateURL">
-				<portlet:param name="mvcRenderCommandName" value="author/update/view" />
+				<portlet:param name="mvcRenderCommandName"
+					value="author/update/view" />
 				<portlet:param name="authorId" value="${entry.authorId}" />
 			</portlet:renderURL>
-			<aui:a cssClass="btn btn-info" href="${AuthorUpdateURL}">Update</aui:a>
+			<aui:a cssClass="btn btn-info" href="${AuthorUpdateURL}">Update jsdjb</aui:a>
+
 			<portlet:actionURL name="author/delete/save" var="AuthorDeleteURL">
 				<portlet:param name="authorId" value="${entry.authorId}" />
 			</portlet:actionURL>
 			<aui:a cssClass="btn btn-danger" href="${AuthorDeleteURL}"
 				onclick="return confirm(’Are you sure you want to delete this author?\n (This will also delete all shoes associated with the author)’);">Delete</aui:a>
+
+
+
+			<portlet:renderURL var="AuthorBooksURL">
+				<portlet:param name="mvcRenderCommandName" value="author/view/books" />
+				<portlet:param name="authorId" value="${entry.authorId}" />
+			</portlet:renderURL>
+			<aui:a cssClass="btn btn-secondary" href="${AuthorBooksURL}">View Books</aui:a>
+
+
+
+
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 	<liferay-ui:search-iterator />
