@@ -242,6 +242,12 @@ public class AuthorLocalServiceUtil {
 		return getService().getAuthorsByBookId(bookId);
 	}
 
+	public static List<Author> getAuthorsColaborate(String authorId)
+		throws PortalException {
+
+		return getService().getAuthorsColaborate(authorId);
+	}
+
 	/**
 	 * Returns the number of authors.
 	 *

@@ -273,6 +273,14 @@ public class AuthorLocalServiceWrapper
 		return _authorLocalService.getAuthorsByBookId(bookId);
 	}
 
+	@Override
+	public java.util.List<com.hehehe.servicebuilder.model.Author>
+			getAuthorsColaborate(String authorId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _authorLocalService.getAuthorsColaborate(authorId);
+	}
+
 	/**
 	 * Returns the number of authors.
 	 *

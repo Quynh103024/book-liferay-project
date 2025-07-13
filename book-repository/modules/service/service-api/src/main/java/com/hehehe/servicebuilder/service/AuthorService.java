@@ -68,6 +68,10 @@ public interface AuthorService extends BaseService {
 	public List<Author> getAuthorsByBookId(String bookId)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Author> getAuthorsColaborate(String authorId)
+		throws PortalException;
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

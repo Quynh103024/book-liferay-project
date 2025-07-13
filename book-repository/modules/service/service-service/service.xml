@@ -49,6 +49,9 @@
 		<column name="stock" type="Integer"></column>
 		<column name="subtitleId" type="String"></column>
 		<column name="categoryId" type="String"></column>
+		<finder return-type="Collection" name="Title">
+			<finder-column name="title"></finder-column>
+		</finder>
 		<finder name="SubtitleId" return-type="Collection">
 			<finder-column name="subtitleId"></finder-column>
 		</finder>

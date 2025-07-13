@@ -39,11 +39,10 @@ int startYear = 105;
 		</c:forEach>
 	</aui:select>
 	<!-- Author (Multiple select) -->
-	<aui:select name="authorIds" label="Author" multiple="true"
-		style="height: 200px; overflow-y: scroll;">
+	<aui:select name="authorIds" label="Author" listType="true" multiple="true">
 		<c:forEach var="author" items="${allAuthor}">
 			<aui:option value="${author.authorId}"
-				selected="${book != null && book.authorIds != null && book.authorIds.contains(author.authorId)}">
+				selected="${book != null && book.authorIds != null}">
             ${author.name}
         </aui:option>
 		</c:forEach>

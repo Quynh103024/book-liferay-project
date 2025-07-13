@@ -108,6 +108,168 @@ public class BookUtil {
 	}
 
 	/**
+	 * Returns all the books where title = &#63;.
+	 *
+	 * @param title the title
+	 * @return the matching books
+	 */
+	public static List<Book> findByTitle(String title) {
+		return getPersistence().findByTitle(title);
+	}
+
+	/**
+	 * Returns a range of all the books where title = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>BookModelImpl</code>.
+	 * </p>
+	 *
+	 * @param title the title
+	 * @param start the lower bound of the range of books
+	 * @param end the upper bound of the range of books (not inclusive)
+	 * @return the range of matching books
+	 */
+	public static List<Book> findByTitle(String title, int start, int end) {
+		return getPersistence().findByTitle(title, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the books where title = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>BookModelImpl</code>.
+	 * </p>
+	 *
+	 * @param title the title
+	 * @param start the lower bound of the range of books
+	 * @param end the upper bound of the range of books (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching books
+	 */
+	public static List<Book> findByTitle(
+		String title, int start, int end,
+		OrderByComparator<Book> orderByComparator) {
+
+		return getPersistence().findByTitle(
+			title, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the books where title = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>BookModelImpl</code>.
+	 * </p>
+	 *
+	 * @param title the title
+	 * @param start the lower bound of the range of books
+	 * @param end the upper bound of the range of books (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching books
+	 */
+	public static List<Book> findByTitle(
+		String title, int start, int end,
+		OrderByComparator<Book> orderByComparator, boolean useFinderCache) {
+
+		return getPersistence().findByTitle(
+			title, start, end, orderByComparator, useFinderCache);
+	}
+
+	/**
+	 * Returns the first book in the ordered set where title = &#63;.
+	 *
+	 * @param title the title
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching book
+	 * @throws NoSuchBookException if a matching book could not be found
+	 */
+	public static Book findByTitle_First(
+			String title, OrderByComparator<Book> orderByComparator)
+		throws com.hehehe.servicebuilder.exception.NoSuchBookException {
+
+		return getPersistence().findByTitle_First(title, orderByComparator);
+	}
+
+	/**
+	 * Returns the first book in the ordered set where title = &#63;.
+	 *
+	 * @param title the title
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching book, or <code>null</code> if a matching book could not be found
+	 */
+	public static Book fetchByTitle_First(
+		String title, OrderByComparator<Book> orderByComparator) {
+
+		return getPersistence().fetchByTitle_First(title, orderByComparator);
+	}
+
+	/**
+	 * Returns the last book in the ordered set where title = &#63;.
+	 *
+	 * @param title the title
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching book
+	 * @throws NoSuchBookException if a matching book could not be found
+	 */
+	public static Book findByTitle_Last(
+			String title, OrderByComparator<Book> orderByComparator)
+		throws com.hehehe.servicebuilder.exception.NoSuchBookException {
+
+		return getPersistence().findByTitle_Last(title, orderByComparator);
+	}
+
+	/**
+	 * Returns the last book in the ordered set where title = &#63;.
+	 *
+	 * @param title the title
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching book, or <code>null</code> if a matching book could not be found
+	 */
+	public static Book fetchByTitle_Last(
+		String title, OrderByComparator<Book> orderByComparator) {
+
+		return getPersistence().fetchByTitle_Last(title, orderByComparator);
+	}
+
+	/**
+	 * Returns the books before and after the current book in the ordered set where title = &#63;.
+	 *
+	 * @param bookId the primary key of the current book
+	 * @param title the title
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next book
+	 * @throws NoSuchBookException if a book with the primary key could not be found
+	 */
+	public static Book[] findByTitle_PrevAndNext(
+			String bookId, String title,
+			OrderByComparator<Book> orderByComparator)
+		throws com.hehehe.servicebuilder.exception.NoSuchBookException {
+
+		return getPersistence().findByTitle_PrevAndNext(
+			bookId, title, orderByComparator);
+	}
+
+	/**
+	 * Removes all the books where title = &#63; from the database.
+	 *
+	 * @param title the title
+	 */
+	public static void removeByTitle(String title) {
+		getPersistence().removeByTitle(title);
+	}
+
+	/**
+	 * Returns the number of books where title = &#63;.
+	 *
+	 * @param title the title
+	 * @return the number of matching books
+	 */
+	public static int countByTitle(String title) {
+		return getPersistence().countByTitle(title);
+	}
+
+	/**
 	 * Returns all the books where subtitleId = &#63;.
 	 *
 	 * @param subtitleId the subtitle ID
