@@ -37,11 +37,13 @@ public class BookUpdateRenderMvcCommand implements MVCRenderCommand {
 		try {
 			renderRequest.setAttribute("book", this.bookService.getBookById(bookId));
 			renderRequest.setAttribute("allAuthor", this.authorService.getAuthors());
+			renderRequest.setAttribute("author",this.authorService.getAuthorsByBookId(bookId));
 			renderRequest.setAttribute("allCategory", this.categoryService.getCategories());
 			renderRequest.setAttribute("allSubtitle", this.subtitleService.getSubtitles());
 		} catch (PortalException e) {
 			SessionErrors.add(renderRequest, "invalid-book");
 		}
+		System.out.println(this.authorService.getAuthorCount());
 		return "/book/update.jsp";
 	}
 }
