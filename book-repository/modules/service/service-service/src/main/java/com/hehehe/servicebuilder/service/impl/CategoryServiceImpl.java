@@ -69,4 +69,8 @@ public class CategoryServiceImpl extends CategoryServiceBaseImpl {
 		return categoryLocalService.isExist(name);
 	}
 	
+	public String getCategoryIdByName(String name) {
+		return categoryLocalService.getCategoryIdByName(name);
+	}
+	
 }

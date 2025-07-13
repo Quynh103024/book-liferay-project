@@ -64,6 +64,9 @@ public interface CategoryService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Category getCategoryById(String categoryId) throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public String getCategoryIdByName(String name);
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

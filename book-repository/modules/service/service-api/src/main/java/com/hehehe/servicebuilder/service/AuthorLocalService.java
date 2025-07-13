@@ -201,6 +201,9 @@ public interface AuthorLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Author getAuthor(String authorId) throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<String> getAuthorIdsByNames(List<String> names);
+
 	/**
 	 * Returns a range of all the authors.
 	 *

@@ -255,6 +255,10 @@ public class CategoryLocalServiceUtil {
 		return getService().getCategoryByBookId(bookId);
 	}
 
+	public static String getCategoryIdByName(String name) {
+		return getService().getCategoryIdByName(name);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

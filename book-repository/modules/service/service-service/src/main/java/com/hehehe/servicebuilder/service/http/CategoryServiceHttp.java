@@ -350,6 +350,37 @@ public class CategoryServiceHttp {
 		}
 	}
 
+	public static String getCategoryIdByName(
+		HttpPrincipal httpPrincipal, String name) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CategoryServiceUtil.class, "getCategoryIdByName",
+				_getCategoryIdByNameParameterTypes9);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, name);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (String)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CategoryServiceHttp.class);
 
 	private static final Class<?>[] _addCategoryParameterTypes0 = new Class[] {
@@ -375,5 +406,7 @@ public class CategoryServiceHttp {
 	private static final Class<?>[] _isExistParameterTypes8 = new Class[] {
 		String.class
 	};
+	private static final Class<?>[] _getCategoryIdByNameParameterTypes9 =
+		new Class[] {String.class};
 
 }

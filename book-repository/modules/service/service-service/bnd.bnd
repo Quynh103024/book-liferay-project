@@ -4,3 +4,6 @@ Bundle-Version: 1.0.0
 Liferay-Require-SchemaVersion: 1.0.0
 Liferay-Service: true
 -dsannotations-options: inherit
+
+-includeresource: @commons-csv-1.10.0.jar
+-exportcontents: org.apache.commons.csv

@@ -215,6 +215,10 @@ public class AuthorLocalServiceUtil {
 		return getService().getAuthor(authorId);
 	}
 
+	public static List<String> getAuthorIdsByNames(List<String> names) {
+		return getService().getAuthorIdsByNames(names);
+	}
+
 	/**
 	 * Returns a range of all the authors.
 	 *

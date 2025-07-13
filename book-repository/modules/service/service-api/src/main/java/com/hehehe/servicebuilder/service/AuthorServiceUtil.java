@@ -48,6 +48,10 @@ public class AuthorServiceUtil {
 		return getService().getAuthorCount();
 	}
 
+	public static List<String> getAuthorIdsByNames(List<String> names) {
+		return getService().getAuthorIdsByNames(names);
+	}
+
 	public static List<Author> getAuthors() {
 		return getService().getAuthors();
 	}

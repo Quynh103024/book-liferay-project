@@ -62,6 +62,9 @@ public interface SubtitleService extends BaseService {
 	public Subtitle getSubtitleById(String subtitleId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public String getSubtitleIdByName(String name);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Subtitle> getSubtitles();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

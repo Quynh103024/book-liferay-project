@@ -50,6 +50,13 @@ public class AuthorServiceWrapper
 	}
 
 	@Override
+	public java.util.List<String> getAuthorIdsByNames(
+		java.util.List<String> names) {
+
+		return _authorService.getAuthorIdsByNames(names);
+	}
+
+	@Override
 	public java.util.List<com.hehehe.servicebuilder.model.Author> getAuthors() {
 		return _authorService.getAuthors();
 	}

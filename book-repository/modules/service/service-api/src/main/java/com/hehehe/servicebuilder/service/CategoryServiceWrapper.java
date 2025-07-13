@@ -76,6 +76,11 @@ public class CategoryServiceWrapper
 		return _categoryService.getCategoryById(categoryId);
 	}
 
+	@Override
+	public String getCategoryIdByName(String name) {
+		return _categoryService.getCategoryIdByName(name);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

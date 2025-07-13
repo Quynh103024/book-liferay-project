@@ -12,6 +12,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.osgi.service.component.annotations.Component;
@@ -74,5 +75,9 @@ public class AuthorServiceImpl extends AuthorServiceBaseImpl {
 
 	public int getAuthorCount() {
 		return authorLocalService.getAuthorsCount();
+	}
+	
+	public List<String> getAuthorIdsByNames(List<String> names) {
+		return authorLocalService.getAuthorIdsByNames(names);
 	}
 }

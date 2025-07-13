@@ -63,6 +63,10 @@ public class SubtitleServiceUtil {
 		return getService().getSubtitleById(subtitleId);
 	}
 
+	public static String getSubtitleIdByName(String name) {
+		return getService().getSubtitleIdByName(name);
+	}
+
 	public static List<Subtitle> getSubtitles() {
 		return getService().getSubtitles();
 	}

@@ -83,4 +83,12 @@ public class SubtitleLocalServiceImpl extends SubtitleLocalServiceBaseImpl {
 		return subtitlePersistence.fetchByName(name) != null;
 	}
 	
+	
+	public String getSubtitleIdByName(String name) {
+		Subtitle subtitle = subtitlePersistence.fetchByName(name);
+		if(subtitle != null) {
+			return subtitle.getSubtitleId();
+		}
+		return "";
+	}
 }

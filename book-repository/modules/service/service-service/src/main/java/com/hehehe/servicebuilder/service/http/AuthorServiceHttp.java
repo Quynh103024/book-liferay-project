@@ -424,6 +424,37 @@ public class AuthorServiceHttp {
 		}
 	}
 
+	public static java.util.List<String> getAuthorIdsByNames(
+		HttpPrincipal httpPrincipal, java.util.List<String> names) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				AuthorServiceUtil.class, "getAuthorIdsByNames",
+				_getAuthorIdsByNamesParameterTypes11);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, names);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<String>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(AuthorServiceHttp.class);
 
 	private static final Class<?>[] _addAuthorParameterTypes0 = new Class[] {
@@ -454,5 +485,7 @@ public class AuthorServiceHttp {
 	};
 	private static final Class<?>[] _getAuthorCountParameterTypes10 =
 		new Class[] {};
+	private static final Class<?>[] _getAuthorIdsByNamesParameterTypes11 =
+		new Class[] {java.util.List.class};
 
 }

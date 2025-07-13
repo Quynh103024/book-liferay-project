@@ -68,4 +68,7 @@ public class SubtitleServiceImpl extends SubtitleServiceBaseImpl {
 		return subtitleLocalService.isExist(name);
 	}
 	
+	public String getSubtitleIdByName(String name) {
+		return subtitleLocalService.getSubtitleIdByName(name);
+	}
 }

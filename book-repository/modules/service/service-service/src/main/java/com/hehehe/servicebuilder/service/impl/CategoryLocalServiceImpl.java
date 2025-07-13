@@ -82,4 +82,12 @@ public class CategoryLocalServiceImpl extends CategoryLocalServiceBaseImpl {
 	public boolean isExist(String name) {
 		return categoryPersistence.fetchByName(name) != null;
 	}
+	
+	public String getCategoryIdByName(String name) {
+		Category category = categoryPersistence.fetchByName(name);
+		if(category != null) {
+			return category.getCategoryId();
+		}
+		return "";
+	}
 }

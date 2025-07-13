@@ -274,6 +274,11 @@ public class SubtitleLocalServiceWrapper
 		return _subtitleLocalService.getSubtitleByBookId(bookId);
 	}
 
+	@Override
+	public String getSubtitleIdByName(String name) {
+		return _subtitleLocalService.getSubtitleIdByName(name);
+	}
+
 	/**
 	 * Returns a range of all the subtitles.
 	 *

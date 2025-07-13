@@ -291,6 +291,11 @@ public class CategoryLocalServiceWrapper
 		return _categoryLocalService.getCategoryByBookId(bookId);
 	}
 
+	@Override
+	public String getCategoryIdByName(String name) {
+		return _categoryLocalService.getCategoryIdByName(name);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

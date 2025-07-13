@@ -218,6 +218,9 @@ public interface SubtitleLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Subtitle getSubtitleByBookId(String bookId) throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public String getSubtitleIdByName(String name);
+
 	/**
 	 * Returns a range of all the subtitles.
 	 *

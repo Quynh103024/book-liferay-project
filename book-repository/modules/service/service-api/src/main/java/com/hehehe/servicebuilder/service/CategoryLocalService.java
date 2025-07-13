@@ -230,6 +230,9 @@ public interface CategoryLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Category getCategoryByBookId(String bookId) throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public String getCategoryIdByName(String name);
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

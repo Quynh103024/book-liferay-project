@@ -5,6 +5,7 @@
 
 package com.hehehe.servicebuilder.service.impl;
 
+import com.hehehe.servicebuilder.exception.NoSuchAuthorException;
 import com.hehehe.servicebuilder.model.Author;
 import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.model.BookAuthor;
@@ -109,5 +110,13 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 	public boolean isExist(String name) {
 		return authorPersistence.fetchByName(name) != null;
 	}
-
+	
+	public List<String> getAuthorIdsByNames(List<String> names) {
+		List<String> authorIds = new ArrayList<>();
+		for(String name : names) {
+			Author author = authorPersistence.fetchByName(name);
+			if(author != null) authorIds.add(author.getAuthorId());
+		}
+		return authorIds;
+	}
 }

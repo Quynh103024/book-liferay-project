@@ -242,6 +242,10 @@ public class SubtitleLocalServiceUtil {
 		return getService().getSubtitleByBookId(bookId);
 	}
 
+	public static String getSubtitleIdByName(String name) {
+		return getService().getSubtitleIdByName(name);
+	}
+
 	/**
 	 * Returns a range of all the subtitles.
 	 *

@@ -238,6 +238,13 @@ public class AuthorLocalServiceWrapper
 		return _authorLocalService.getAuthor(authorId);
 	}
 
+	@Override
+	public java.util.List<String> getAuthorIdsByNames(
+		java.util.List<String> names) {
+
+		return _authorLocalService.getAuthorIdsByNames(names);
+	}
+
 	/**
 	 * Returns a range of all the authors.
 	 *

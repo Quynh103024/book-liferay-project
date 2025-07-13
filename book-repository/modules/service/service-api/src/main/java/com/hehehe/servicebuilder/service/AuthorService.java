@@ -55,6 +55,9 @@ public interface AuthorService extends BaseService {
 	public int getAuthorCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<String> getAuthorIdsByNames(List<String> names);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Author> getAuthors();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

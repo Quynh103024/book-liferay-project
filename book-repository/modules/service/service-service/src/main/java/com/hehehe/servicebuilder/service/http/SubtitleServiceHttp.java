@@ -350,6 +350,37 @@ public class SubtitleServiceHttp {
 		}
 	}
 
+	public static String getSubtitleIdByName(
+		HttpPrincipal httpPrincipal, String name) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				SubtitleServiceUtil.class, "getSubtitleIdByName",
+				_getSubtitleIdByNameParameterTypes9);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, name);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (String)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(SubtitleServiceHttp.class);
 
 	private static final Class<?>[] _addSubtitleParameterTypes0 = new Class[] {
@@ -374,5 +405,7 @@ public class SubtitleServiceHttp {
 	private static final Class<?>[] _isExistParameterTypes8 = new Class[] {
 		String.class
 	};
+	private static final Class<?>[] _getSubtitleIdByNameParameterTypes9 =
+		new Class[] {String.class};
 
 }

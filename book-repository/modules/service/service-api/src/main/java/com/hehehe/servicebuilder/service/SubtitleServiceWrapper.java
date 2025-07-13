@@ -65,6 +65,11 @@ public class SubtitleServiceWrapper
 	}
 
 	@Override
+	public String getSubtitleIdByName(String name) {
+		return _subtitleService.getSubtitleIdByName(name);
+	}
+
+	@Override
 	public java.util.List<com.hehehe.servicebuilder.model.Subtitle>
 		getSubtitles() {
 
