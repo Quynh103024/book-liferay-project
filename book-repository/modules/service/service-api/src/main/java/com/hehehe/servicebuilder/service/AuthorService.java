@@ -69,7 +69,7 @@ public interface AuthorService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Author> getAuthorsColaborate(String authorId)
+	public List<Author> getAuthorsCollaborate(String authorId)
 		throws PortalException;
 
 	/**

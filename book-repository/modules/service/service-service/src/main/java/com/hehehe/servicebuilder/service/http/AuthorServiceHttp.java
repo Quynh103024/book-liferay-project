@@ -255,13 +255,13 @@ public class AuthorServiceHttp {
 	}
 
 	public static java.util.List<com.hehehe.servicebuilder.model.Author>
-			getAuthorsColaborate(HttpPrincipal httpPrincipal, String authorId)
+			getAuthorsCollaborate(HttpPrincipal httpPrincipal, String authorId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
 			MethodKey methodKey = new MethodKey(
-				AuthorServiceUtil.class, "getAuthorsColaborate",
-				_getAuthorsColaborateParameterTypes6);
+				AuthorServiceUtil.class, "getAuthorsCollaborate",
+				_getAuthorsCollaborateParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, authorId);
@@ -441,7 +441,7 @@ public class AuthorServiceHttp {
 	private static final Class<?>[] _getAuthorsParameterTypes4 = new Class[] {};
 	private static final Class<?>[] _getAuthorsByBookIdParameterTypes5 =
 		new Class[] {String.class};
-	private static final Class<?>[] _getAuthorsColaborateParameterTypes6 =
+	private static final Class<?>[] _getAuthorsCollaborateParameterTypes6 =
 		new Class[] {String.class};
 	private static final Class<?>[] _updateAuthorParameterTypes7 = new Class[] {
 		com.hehehe.servicebuilder.model.Author.class

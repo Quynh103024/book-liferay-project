@@ -275,10 +275,10 @@ public class AuthorLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.hehehe.servicebuilder.model.Author>
-			getAuthorsColaborate(String authorId)
+			getAuthorsCollaborate(String authorId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _authorLocalService.getAuthorsColaborate(authorId);
+		return _authorLocalService.getAuthorsCollaborate(authorId);
 	}
 
 	/**

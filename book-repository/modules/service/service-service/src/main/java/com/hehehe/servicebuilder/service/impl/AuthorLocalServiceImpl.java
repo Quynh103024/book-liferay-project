@@ -68,13 +68,15 @@ public class AuthorLocalServiceImpl extends AuthorLocalServiceBaseImpl {
 		return authors;
 	}
 	
-	public List<Author> getAuthorsColaborate(String authorId) throws PortalException{
+	public List<Author> getAuthorsCollaborate(String authorId) throws PortalException{
 		List<Book> books = bookLocalService.getBooksByAuthorId(authorId);
 		Set<Author> authors = new HashSet<>();
 		for(Book book : books) {
 			List<Author> list = authorLocalService.getAuthorsByBookId(book.getBookId());
 			for(Author au : list) {
-				authors.add(au);
+				if (!au.getAuthorId().equals(authorId)) {
+					authors.add(au);
+				}
 			}
 		}
 		return new ArrayList<>(authors);

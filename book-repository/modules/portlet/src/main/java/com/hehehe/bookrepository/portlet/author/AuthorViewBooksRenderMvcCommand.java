@@ -1,6 +1,7 @@
 package com.hehehe.bookrepository.portlet.author;
 
 import com.hehehe.bookrepository.portlet.constants.BookPortletKeys;
+import com.hehehe.servicebuilder.model.Author;
 import com.hehehe.servicebuilder.model.Book;
 import com.hehehe.servicebuilder.service.AuthorService;
 import com.hehehe.servicebuilder.service.BookService;
@@ -38,9 +39,11 @@ import org.osgi.service.component.annotations.Reference;
 	    @Override
 	    public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
 	        String authorId = ParamUtil.getString(renderRequest, "authorId");
-
+	        
 	        List<Book> books = null;
 			try {
+				List<Author> authors = authorService.getAuthorsCollaborate(authorId);
+				System.out.println(authors);
 				books = bookService.getBooksByAuthorId(authorId);
 			} catch (PortalException e) {
 				// TODO Auto-generated catch block

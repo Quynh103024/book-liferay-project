@@ -80,10 +80,10 @@ public class AuthorServiceWrapper
 
 	@Override
 	public java.util.List<com.hehehe.servicebuilder.model.Author>
-			getAuthorsColaborate(String authorId)
+			getAuthorsCollaborate(String authorId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _authorService.getAuthorsColaborate(authorId);
+		return _authorService.getAuthorsCollaborate(authorId);
 	}
 
 	/**

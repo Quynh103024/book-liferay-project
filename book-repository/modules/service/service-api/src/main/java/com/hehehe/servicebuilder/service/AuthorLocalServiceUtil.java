@@ -242,10 +242,10 @@ public class AuthorLocalServiceUtil {
 		return getService().getAuthorsByBookId(bookId);
 	}
 
-	public static List<Author> getAuthorsColaborate(String authorId)
+	public static List<Author> getAuthorsCollaborate(String authorId)
 		throws PortalException {
 
-		return getService().getAuthorsColaborate(authorId);
+		return getService().getAuthorsCollaborate(authorId);
 	}
 
 	/**
