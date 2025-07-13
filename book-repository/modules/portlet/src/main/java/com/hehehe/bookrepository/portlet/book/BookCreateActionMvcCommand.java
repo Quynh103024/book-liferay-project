@@ -9,6 +9,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -51,7 +52,7 @@ public class BookCreateActionMvcCommand extends BaseMVCActionCommand {
 	        return;
 	    }
 	    System.out.println(" success");
-		this.bookService.addBook(null,title, description, thumbnail, subtitleId, categoryId, price, stock, pages, publicYear);
+		this.bookService.addBook(new ArrayList<>(),title, description, thumbnail, subtitleId, categoryId, price, stock, pages, publicYear);
 	}
 }
 
