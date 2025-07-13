@@ -1,7 +1,6 @@
 package com.hehehe.bookrepository.portlet.category;
 
 import com.hehehe.bookrepository.portlet.constants.BookPortletKeys;
-import com.hehehe.servicebuilder.model.Author;
 import com.hehehe.servicebuilder.model.Category;
 import com.hehehe.servicebuilder.service.CategoryService;
 import com.liferay.portal.kernel.exception.PortalException;
