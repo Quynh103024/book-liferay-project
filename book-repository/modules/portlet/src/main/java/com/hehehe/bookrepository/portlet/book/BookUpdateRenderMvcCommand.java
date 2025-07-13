@@ -35,7 +35,7 @@ public class BookUpdateRenderMvcCommand implements MVCRenderCommand {
 		// TODO Auto-generated method stub
 		String bookId = ParamUtil.getString(renderRequest, "bookId");
 		try {
-			renderRequest.setAttribute("book", bookService.getBookById(bookId));
+			renderRequest.setAttribute("book", this.bookService.getBookById(bookId));
 			renderRequest.setAttribute("allAuthor", this.authorService.getAuthors());
 			renderRequest.setAttribute("allCategory", this.categoryService.getCategories());
 			renderRequest.setAttribute("allSubtitle", this.subtitleService.getSubtitles());

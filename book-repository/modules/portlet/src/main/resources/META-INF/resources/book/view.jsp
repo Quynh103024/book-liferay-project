@@ -21,6 +21,11 @@
 		<liferay-ui:search-container-column-text property="num_pages" />
 		<liferay-ui:search-container-column-text property="published_year" />
 		<liferay-ui:search-container-column-text name="Actions">
+			<portlet:renderURL var="BookDetailURL">
+				<portlet:param name="mvcRenderCommandName" value="book/view/detail" />
+				<portlet:param name="bookId" value="${entry.bookId}" />
+			</portlet:renderURL>
+			<aui:a cssClass="btn btn-primary" href="${BookDetailURL}">Detail</aui:a>
 			<portlet:renderURL var="BookUpdateURL">
 				<portlet:param name="mvcRenderCommandName" value="book/update/view" />
 				<portlet:param name="bookId" value="${entry.bookId}" />
