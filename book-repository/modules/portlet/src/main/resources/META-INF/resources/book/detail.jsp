@@ -39,22 +39,22 @@
             <strong>Subtitle:</strong> ${subtitle.name} <br />
             <strong>Created At:</strong> ${book.createDate} <br />
             <strong>Last Modified:</strong> ${book.modifiedDate} <br />
-            <strong>Thumbnail:</strong><br/>
-            <img src="${book.thumbnail}" alt="Thumbnail" style="max-width: 200px;" />
-        </aui:col>
-    </aui:row>
 
-    <aui:row>
-        <aui:col>
+            <!-- Move Authors section here -->
             <strong>Authors:</strong>
             <ul>
                 <c:forEach var="author" items="${authors}">
                     <li>${author.name}</li>
                 </c:forEach>
             </ul>
+
+            <!-- Then show the thumbnail below -->
+            <strong>Thumbnail:</strong><br/>
+            <img src="${book.thumbnail}" alt="${book.thumbnail}" style="max-width: 200px;" />
         </aui:col>
     </aui:row>
 </aui:fieldset>
+
 
 <aui:button-row>
     <aui:button type="button" value="Back" onClick="history.back();" cssClass="btn-secondary" />

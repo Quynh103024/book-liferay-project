@@ -1,5 +1,6 @@
 <%@page import="com.hehehe.servicebuilder.model.Book"%>
 <%@ page import="java.time.LocalDate"%>
+
 <%
 int currentYear = LocalDate.now().getYear();
 int startYear = 105;
@@ -20,7 +21,7 @@ int startYear = 105;
 	<aui:input name="description">
 		<aui:validator name="required"></aui:validator>
 	</aui:input>
-	<aui:input name="thumbnail">
+	<aui:input name="thumbnail" type="text" maxlength="500" size="200">
 		<aui:validator name="required"></aui:validator>
 	</aui:input>
 	<aui:input name="price" type="number" label="Price">

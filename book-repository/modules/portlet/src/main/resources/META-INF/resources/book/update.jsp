@@ -21,7 +21,7 @@ int startYear = 105;
 	<aui:input name="description">
 		<aui:validator name="required"></aui:validator>
 	</aui:input>
-	<aui:input name="thumbnail">
+	<aui:input name="thumbnail" type="text" maxlength="500"  size="200">
 		<aui:validator name="required"></aui:validator>
 	</aui:input>
 	<aui:input name="price" type="number" label="Price">
@@ -39,15 +39,21 @@ int startYear = 105;
 			<aui:option value="${year}" selected="${book.published_year == year}">${year}</aui:option>
 		</c:forEach>
 	</aui:select>
-	<aui:select name="authorIds" label="Author" multiple="true"
-		size="10" 
+	<aui:select name="authorIds" label="Author" multiple="true" size="10"
 		style="height: 200px; overflow-y: scroll;">
-		<c:forEach var="author" items="${allAuthor}">
-			<aui:option value="${author.authorId}"
-				selected="${book != null && book.authorIds != null && book.authorIds.contains(author.authorId)}">
-            ${author.name}
-        </aui:option>
+		<c:forEach var="authorItem" items="${allAuthor}">
+			<c:set var="isSelected" value="false" />
+			<c:forEach var="author" items="${authors}">
+				<c:if test="${author.authorId == authorItem.authorId}">
+					<c:set var="isSelected" value="true" />
+				</c:if>
+			</c:forEach>
+
+			<aui:option value="${authorItem.authorId}" selected="${isSelected}">
+        ${authorItem.name}
+    </aui:option>
 		</c:forEach>
+
 	</aui:select>
 	<!-- Category (Single select) -->
 	<aui:select name="categoryId" label="Category">
@@ -69,6 +75,10 @@ int startYear = 105;
 		</c:forEach>
 	</aui:select>
 	<aui:button-row>
-		<aui:button type="submit" value="Update Book" />
+		<aui:button type="submit" value="Update Book" onClick="return confirm('Are you sure you want to update this book?');"/>
 	</aui:button-row>
 </aui:form>
+
+<aui:button-row>
+    <aui:button type="button" value="Back" onClick="history.back();" cssClass="btn-secondary" />
+</aui:button-row>

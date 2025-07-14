@@ -42,7 +42,7 @@
 		<column name="createDate" type="Date"></column>
 		<column name="modifiedDate" type="Date"></column>
 		<column name="description" type="String"></column>
-		<column name="thumbnail" type="String"></column>
+		<column name="thumbnail" type="Text"></column>
 		<column name="published_year" type="Integer"></column>
 		<column name="num_pages" type="Integer"></column>
 		<column name="price" type="Integer"></column>
